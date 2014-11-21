@@ -1,0 +1,150 @@
+//John Faski
+//AMR - Dr. Mohan
+//This program writes out my initials using turtlesim
+
+#include <ros/ros.h>
+#include <geometry_msgs/Twist.h>
+#include <stdlib.h>
+
+int main(int argc, char **argv)
+{
+      //Initialize ROS system and become a node
+	ros::init(argc, argv, "publish_velocity");
+	ros::NodeHandle nh;
+
+      //Create a publisher object
+	ros::Publisher pub = nh.advertise<geometry_msgs::Twist>("turtle1/cmd_vel", 1000);
+
+	int i=1; //loop control counter
+	
+      //send data at a rate of 1Hz
+	ros::Rate rate(1);
+	while(ros::ok())
+	{
+		geometry_msgs::Twist msg;
+		
+		switch(i){
+		case 1:     //faces down
+		msg.linear.x = 0;
+		msg.angular.z = -1.5;
+		i++;
+		break;
+
+		case 2:    //begins the J
+		msg.linear.x = 3;
+		msg.angular.z = 0;
+		i++;
+		break;
+
+		case 3:  //hook of J
+		msg.linear.x = 1;
+		msg.angular.z = -2;
+		i++;
+		break;
+
+		case 4:  //finish J
+		msg.linear.x = 1;
+		msg.angular.z = -1;
+		i++;
+		break;
+
+		case 5:  //move to start F
+		msg.linear.x = 0;
+		msg.angular.z = -2;
+		i++;
+		break;
+
+		case 6:
+		msg.linear.x = 2.5;
+		msg.angular.z = 0;
+		i++;
+		break;
+
+		case 7:  //starting F
+		msg.linear.x = 0;
+		msg.angular.z = 2;
+		i++;
+		break;
+
+		case 8:  //up
+		msg.linear.x = 2.5;
+		msg.angular.z = 0;
+		i++;
+		break;
+
+		case 9:  //turn right
+		msg.linear.x = 0;
+		msg.angular.z = -1.75;
+		i++;
+		break;
+
+		case 10:  //top of F
+		msg.linear.x = 1.75;
+		msg.angular.z = 0;
+		i++;
+		break;
+
+		case 11:  //setting up last stroke of F
+		msg.linear.x = -1.75;
+		msg.angular.z = 0;
+		i++;
+		break;
+
+		case 12:
+		msg.linear.x = 0;
+		msg.angular.z = 1.75;
+		i++;
+		break;
+
+		case 13:
+		msg.linear.x = -0.75;
+		msg.angular.z = 0;
+		i++;
+		break;
+
+		case 14:
+		msg.linear.x = 0;
+		msg.angular.z = -1.75;
+		i++;
+		break;
+
+		case 15:  //last stroke of F
+		msg.linear.x = 1;
+		msg.angular.z = 0;
+		i++;
+		break;
+
+		default:
+		msg.linear.x = 0;
+		msg.angular.z = 0;
+		break;
+		} //end switch statement
+		//publish message
+		pub.publish(msg);
+
+		ROS_INFO_STREAM("sending velocity command: "
+			<< "linear=" << msg.linear.x
+			<< " angular=" << msg.angular.z);
+
+		//tells processor to look at it only as often as is specified
+		rate.sleep();
+
+	} //end while loop
+
+} //end main	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

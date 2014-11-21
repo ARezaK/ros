@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "teleop_base")
+set(teleop_base_MAINTAINER "amrl <amrl@todo.todo>")
+set(teleop_base_DEPRECATED "")
+set(teleop_base_VERSION "0.0.0")
+set(teleop_base_BUILD_DEPENDS "control_toolbox" "geometry_msgs" "joy" "nav_msgs" "roscpp" "rospy" "std_msgs" "tf")
+set(teleop_base_RUN_DEPENDS "control_toolbox" "geometry_msgs" "joy" "nav_msgs" "roscpp" "rospy" "std_msgs" "tf")
+set(teleop_base_BUILDTOOL_DEPENDS "catkin")

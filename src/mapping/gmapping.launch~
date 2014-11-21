@@ -1,0 +1,16 @@
+<launch>
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <rosparam>
+      odom_frame: odom
+      delta: 0.01
+      linearUpdate: 0.5
+      base_frame: base_link
+      occ_thresh : 0.25
+      xmin: -20
+      ymin: -20
+      xmax: 200
+      ymax: 200
+    </rosparam>
+    <remap from="/scan" to="/base_scan" />
+  </node>
+</launch>

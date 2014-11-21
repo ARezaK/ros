@@ -1,0 +1,8 @@
+prefix=/home/ameer/Desktop/catkin_ws/devel
+
+Name: teleop_base
+Description: Description of teleop_base
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/ameer/Desktop/catkin_ws/devel/lib 
+Requires: 

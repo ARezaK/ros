@@ -1,0 +1,9 @@
+
+
+<launch>
+  <param name="/use_sim_time" value="true"/>
+  <node pkg="stage_ros" type="stageros" name="IGVC_stage" args="$(find stageroscam)/world/20Mx20Mhmwk4c.world" output="screen">
+  </node>
+  <node pkg="rand_walk_w_goal" type="random_walk" name="random_walk"  output="screen">
+  </node>
+ </launch>

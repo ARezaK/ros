@@ -1,0 +1,329 @@
+#include "ros/ros.h"
+#include "geometry_msgs/Twist.h"
+#include "sensor_msgs/LaserScan.h"
+#include "nav_msgs/Odometry.h"//needed to read in current location(20Mx20M)start(4.5,-5.5)
+#include "geometry_msgs/PoseStamped.h"
+#include "geometry_msgs/Pose.h"//needed to read in current location(20Mx20M)start(4.5,-5.5)
+#include <cstdlib> /d/ Needed for rand()
+#include <ctime> // Needed to seed random number generator with a time value
+#define farRange  10
+class RandomWalk {
+public:
+    // Construst a new RandomWalk object and hook up this ROS node
+    // to the simulated robot's velocity control and laser topics
+    RandomWalk(ros::NodeHandle& nh);
+    void move(double linearVelMPS, double angularVelRadPS);
+
+    // Process the incoming laser scan message
+    void commandCallback(const sensor_msgs::LaserScan::ConstPtr& msg);
+
+    void CheckPoseCallback(const nav_msgs::Odometry::ConstPtr& msg){
+        robotx = msg->pose.pose.position.x;
+        roboty = msg->pose.pose.position.y;
+        // roboto = msg->pose.pose.orientation;
+
+        x = msg->twist.twist.linear.x;
+        y = msg->twist.twist.linear.y;
+        w = msg->twist.twist.angular.z;
+    };
+    // Main FSM loop for ensuring that ROS messages are
+    // processed in a timely manner, and also for sending
+    // velocity controls to the simulated robot based on the FSM state
+    void spin();
+    float speed_ratio;
+
+    enum FSM {FSM_STOP_TURN,FSM_GO_GAP,FSM_MOVE_FORWARD, FSM_ROTATE,FSM_Obstacle,FSM_STOP};
+    // Tunable parameters
+    // TODO: tune parameters as you see fit
+    const static double MIN_SCAN_ANGLE_RAD = -90.0/180*M_PI;
+    const static double MAX_SCAN_ANGLE_RAD = +90.0/180*M_PI;
+    const static float PROXIMITY_RANGE_M = 1.5; // Should be smaller than sensor_msgs::LaserScan::range_max
+    const static double FORWARD_SPEED_MPS = 0.6;         //0.6;
+    const static double ROTATE_SPEED_RADPS = M_PI/2;    //from M_PI/2
+
+protected:
+    ros::Publisher commandPub; // Publisher to the simulated robot's velocity command topic
+    ros::Subscriber laserSub; // Subscriber to the simulated robot's laser scan topic
+    ros::Subscriber odomSub;
+    enum FSM fsm; // Finite state machine for the random walk algorithm
+    ros::Time rotateStartTime; // Start time of the rotation
+    ros::Duration rotateDuration; // Duration of the rotation
+    int rotateDir;
+    int robot_moving;
+    unsigned int rotate_now;
+    float roation_speed;
+    float robotx,roboty,roboto,x,y,w;
+    float last_pose_x;
+    float last_pose_y;
+    unsigned int f_stop;
+    float time_duration;
+    unsigned int index_middle;
+    float dist_to_gap;
+    unsigned int dif_index_to_gap;
+    unsigned int obstacle_counter;
+    unsigned int gap_width;
+    unsigned int f_new_gap;
+    unsigned int gap_begin_index;
+    unsigned int gap_end_index;
+    unsigned int biggest_gap_width;
+};
+
+
+RandomWalk::RandomWalk(ros::NodeHandle& nh)
+{
+    fsm = FSM_MOVE_FORWARD;
+    robot_moving=0;
+    roation_speed=0;
+    last_pose_y=roboty;
+    rotate_now=0;
+    //last_pose_x=robotx;
+    rotateStartTime = ros::Time::now();
+    rotateDuration = ros::Duration(0.f);
+    // Initialize random time generator
+    srand(time(NULL));
+    // Advertise a new publisher for the simulated robot's velocity command topic
+    // (the second argument indicates that if multiple command messages are in
+    // the queue to be sent, only the last command will be sent)
+    commandPub = nh.advertise<geometry_msgs::Twist>("cmd_vel", 1);
+    // Subscribe to the simulated robot's laser scan topic and tell ROS to call
+    // this->commandCallback() whenever a new message is published on that topic
+    laserSub = nh.subscribe("base_scan", 1, &RandomWalk::commandCallback, this);
+    odomSub = nh.subscribe("odom", 1, &RandomWalk::CheckPosCallback, this);
+}
+
+// Send a velocity command
+void RandomWalk::move(double linearVelMPS, double angularVelRadPS) {
+    geometry_msgs::Twist msg; // The default constructor will set all commands to 0
+    msg.linear.x = linearVelMPS;
+    msg.angular.z = angularVelRadPS;
+    commandPub.publish(msg);
+}
+
+void RandomWalk::commandCallback(const sensor_msgs::LaserScan::ConstPtr& msg) {
+
+    double goal_x=-4.5;       //the goal waypoint x value
+    double goal_y=5.5;        //the goal waypoint y value
+
+    float target_orientation;    // the orientation to the goal waypoint
+    float current_orientation;   // the orientation of the robot moving
+    unsigned int minIndex = ceil((MIN_SCAN_ANGLE_RAD - msg->angle_min) / msg->angle_increment);
+
+    unsigned int maxIndex = ceil((MAX_SCAN_ANGLE_RAD - msg->angle_min) / msg->angle_increment);
+
+    float closestRange = msg->ranges[minIndex];
+    //detect to see if there are any obstacles around the robot within PROXIMITY_RANGE_M
+    //and are there any obstacle ahead within 4 meters
+
+    for (unsigned int currIndex = (minIndex ); currIndex < (maxIndex); currIndex++) {
+        if (msg->ranges[currIndex] <closestRange)
+            closestRange = msg->ranges[currIndex];  // find the closest range to the robot
+
+    }
+    // It is needed to detect the obstacle if the fsm is moving farward or is going to the gap.
+    if((fsm == FSM_MOVE_FORWARD)/*||(fsm == FSM_GO_GAP)*/)
+    {
+        if(closestRange<0.5)  // if there are any obstacle around the robot less than 0.5
+
+            fsm = FSM_Obstacle;  // set the status to obstacle mode
+        else        //detect the obstacle in the forward direction
+        {
+            obstacle_counter=0;
+            //closestRange=10;
+            for (unsigned int currIndex = (minIndex+250 ); currIndex < (maxIndex-250); currIndex++)  //320   2
+            {
+                if (msg->ranges[currIndex] <4) // if the obstacle ahead is less than 4
+                    obstacle_counter++;
+
+            }
+            if(obstacle_counter>100)       // the obstacle density is more than 50%
+
+                fsm=FSM_Obstacle;             // set the status to obstacle mode
+        }
+    }
+
+    if(fsm==FSM_Obstacle)
+    {
+        unsigned int minIndex = ceil((MIN_SCAN_ANGLE_RAD - msg->angle_min) / msg->angle_increment);
+
+        unsigned int maxIndex = ceil((MAX_SCAN_ANGLE_RAD - msg->angle_min) / msg->angle_increment);
+
+        f_new_gap=1;           // the flag used for the capture the begin edge of the gap
+        index_middle=0;   // the index number of the middle of the best candidate gap
+        dist_to_gap=0;     // the distance to the best candidate gap
+        biggest_gap_width=0;
+
+        for (unsigned int currIndex = minIndex; currIndex < maxIndex; currIndex++)
+        {
+            // if the range is more than 10, it is considered as the gap
+            if (msg->ranges[currIndex] >10)
+            {
+                if(f_new_gap==1)   // if it is the first time to find, it is looked as the begin edge
+                {gap_begin_index=currIndex;
+                    f_new_gap=0;
+                }
+
+            }
+                //To load the end edge index once the range is less than 9 and the begin edge has been captured
+            else if((f_new_gap==0)&&(msg->ranges[currIndex] <9))
+            {
+                f_new_gap=1;
+                gap_end_index=currIndex;
+                // calculate the width of the gap
+                gap_width=(unsigned int)(gap_end_index-gap_begin_index);
+                // we think the gap is big enough if its width is more than 80
+                if(gap_width>80)
+                {
+
+
+                    // to keep the best candidate gap that mean it is the cloest to the forwarding oritation
+                    if(abs(index_middle-(minIndex+maxIndex)/2)>abs(gap_end_index-(minIndex+maxIndex)/2))
+                    {
+                        //biggest_gap_width=gap_width;
+                        index_middle=gap_end_index-(gap_end_index-gap_begin_index)/2;
+                        //calculate the distance to the gap then add 1 to make sure robot can move out the gap
+                        dist_to_gap=(msg->ranges[gap_begin_index-1]+msg->ranges[gap_end_index+1])/2+0.5;
+
+                    }
+                    gap_width=0;
+                }
+            }
+        }
+        // to determine the turn direction
+
+        if(index_middle<520)
+        {
+            dif_index_to_gap=540-index_middle;
+            rotateDir=-1;
+        }
+        else if(index_middle>560)
+        {rotateDir=1;
+            dif_index_to_gap=index_middle-540;
+        }
+        else
+        {rotateDir=0;
+            dif_index_to_gap=0;
+        }
+        // to determin the duration time to point to the gap
+        time_duration=float((float)dif_index_to_gap*(msg->angle_increment)/ROTATE_SPEED_RADPS);
+
+
+        if(rotate_now!=1)
+        {
+            rotate_now=1;
+            fsm=FSM_STOP_TURN;
+            rotateStartTime = ros::Time::now();
+            rotateDuration= ros::Duration(time_duration); //for pi/2 rad/s this means 90 degree per second
+        }
+
+
+    }
+
+
+    if((fsm == FSM_MOVE_FORWARD)||(fsm == FSM_STOP))
+
+    {
+
+        target_orientation=atan2((goal_y-roboty),(goal_x-robotx));
+
+        if(robot_moving<10)    // to calculate the current robot oritation after moving for a certain time
+            current_orientation= target_orientation;
+        else                // elsewise, to start calculate the oritation based on the sequent robot coordiation
+            current_orientation=atan2((roboty-last_pose_y),(robotx-last_pose_x));
+
+        // To continue drive the robot to the goal if the difference of x or y between them more 0.5
+        if ((abs(goal_x-robotx)>0.5)||(abs(goal_y-roboty)>0.5))
+        {
+
+            // to determine the oritation and turn rate based on the angle difference.
+            if(target_orientation>current_orientation)
+            {rotateDir=1;
+                roation_speed=(target_orientation-current_orientation)/3.0*ROTATE_SPEED_RADPS;
+            }
+            else
+            {
+                roation_speed=(current_orientation-target_orientation)/3.0*ROTATE_SPEED_RADPS;
+
+                rotateDir=-1;
+            }
+
+            fsm = FSM_MOVE_FORWARD;
+        }
+        else
+        {
+            fsm = FSM_STOP;//stop
+        }
+        if(robot_moving<100) robot_moving++;
+        last_pose_y=roboty;   // record the current coordition for the next oritation calculating
+        last_pose_x=robotx;
+    }
+
+
+}
+void RandomWalk::spin() {
+
+    static unsigned char forward_flag;
+    static unsigned char go_and_turn_time;
+
+    ros::Rate rate(10); // Specify the FSM loop rate in Hz
+    while (ros::ok()) { // Keep spinning loop until user presses Ctrl+C
+        // TODO: Either call:
+        //
+        //- move(0, ROTATE_SPEED_RADPS); // Rotate right
+        //
+        // or
+        //
+        //- move(FORWARD_SPEED_MPS, 0); // Move foward
+        //
+        // depending on the FSM state; also change the FSM state when appropriate
+        /////////////////////// ANSWER CODE BEGIN ///////////////////
+        // go forward and rotate at the same time
+        if (fsm == FSM_MOVE_FORWARD){
+
+            move(FORWARD_SPEED_MPS, rotateDir*roation_speed);
+        }
+
+            // rotate to the gap then change the state to go to the gap
+        else if(fsm==FSM_STOP_TURN)
+        {
+            move(0, rotateDir*ROTATE_SPEED_RADPS);
+            if(ros::Time::now() > (rotateStartTime+rotateDuration))
+            {
+                rotate_now=0;
+                time_duration=dist_to_gap/FORWARD_SPEED_MPS;
+                rotateStartTime = ros::Time::now();
+                rotateDuration= ros::Duration(time_duration);
+                fsm = FSM_GO_GAP;
+            }
+
+        }
+// move the robot to the gap,then set the state to move farward to the goal
+        else if (fsm == FSM_GO_GAP){
+
+            move(FORWARD_SPEED_MPS, 0);
+            if(ros::Time::now() > (rotateStartTime+rotateDuration))
+                fsm = FSM_MOVE_FORWARD;
+        }
+        else if(fsm==FSM_STOP)
+        {
+
+            move(0, 0);
+
+        }
+
+
+
+        ros::spinOnce(); // Need to call this function often to allow ROS to process incoming messages
+        rate.sleep(); // Sleep for the rest of the cycle, to enforce the FSM loop rate
+    }
+}
+
+
+
+int main(int argc, char **argv) {
+    ros::init(argc, argv, "random_walk"); // Initiate new ROS node named "random_walk"
+    ros::NodeHandle n;
+    RandomWalk walker(n); // Create new random walk object
+    walker.spin(); // Execute FSM loop
+    return 0;
+}
+
