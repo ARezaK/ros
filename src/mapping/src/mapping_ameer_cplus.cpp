@@ -416,7 +416,7 @@ int main(int argc, char **argv) {
     ros::NodeHandle n;
     //MAPS PARAMETERs
 
-   
+
 
     //MAP 2 (OBSTACLE Thresholded map)
     obsta_map.info.resolution=0.1;

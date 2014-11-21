@@ -32,8 +32,6 @@ public:
     const static double MIN_SCAN_ANGLE_RAD = -90.0 / 180 * M_PI;
     const static double MAX_SCAN_ANGLE_RAD = +90.0 / 180 * M_PI;
     const static float PROXIMITY_RANGE_M = 1.0; // Should be smaller than sensor_msgs::LaserScan::range_max
-    const static double FORWARD_SPEED_MPS = 1.0;
-    const static double ROTATE_SPEED_RADPS = M_PI / 2;
 // Create a LaserScan message object that can be used to copy the laser callback message for later processing
     sensor_msgs::LaserScan Lidar_msg;
 // Note:  You cannot execute the resize operation in the class definition.  This amounts to a method
@@ -52,6 +50,9 @@ protected:
     ros::Time rotateStartTime; // Start time of the rotation
     ros::Duration rotateDuration; // Duration of the rotation
     int rotateDir;
+    double ROTATE_SPEED_RADPS;
+    double FORWARD_SPEED_MPS;
+
 };
 
 // Constructor definition -- intialize values
@@ -61,6 +62,9 @@ RandomWalk::RandomWalk(ros::NodeHandle &nh) {
     rotateStartTime = ros::Time::now();     //initialize to current time
     rotateDuration = ros::Duration(0.f);    //0.0 duration type float
     rotateDir = 0;
+    ROTATE_SPEED_RADPS = M_PI / 4;
+    FORWARD_SPEED_MPS = 1.0;
+
 
 // The ranges element of the Lidar_msg initially has no memory allocated.  The resize function must be
 // called before we can copy any data into it.  The 1081 value must be determined based on the scanner setup.
@@ -113,7 +117,7 @@ void RandomWalk::commandCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
 	Lidar_msg.range_max = msg->range_max;
 
 	N= 1+ floor((msg->angle_max - msg->angle_min) / msg->angle_increment);
-	ROS_INFO_STREAM("Size of Range array: " << N);
+	//ROS_INFO_STREAM("Size of Range array: " << N); //1081
 	Lidar_msg.ranges=msg->ranges;
 // Loop to print values in ranges array for testing purposes
 //	for (unsigned int currIndex = 1; currIndex <= 1081; currIndex++) {
@@ -139,16 +143,65 @@ void RandomWalk::processSensors() {
 
         unsigned int minIndex = ceil((MIN_SCAN_ANGLE_RAD - Lidar_msg.angle_min) / Lidar_msg.angle_increment);
         unsigned int maxIndex = ceil((MAX_SCAN_ANGLE_RAD - Lidar_msg.angle_min) / Lidar_msg.angle_increment);
+        //ROS_INFO_STREAM(minIndex); //181
+       // ROS_INFO_STREAM(maxIndex); //900
+
+
+
         float closestRange = Lidar_msg.ranges[minIndex];
-        int colsestRange_index;
-        for (unsigned int currIndex = minIndex + 1; currIndex < maxIndex; currIndex++) {
-            if (Lidar_msg.ranges[currIndex] < closestRange) {
-                closestRange = Lidar_msg.ranges[currIndex];
-                colsestRange_index = currIndex;
-                rotateStartTime = ros::Time::now();
+        //int colsestRange_index;
+        ROS_INFO_STREAM("START");
+
+        for (unsigned int i=0 ; i <200; i++) { //Check the right of of the robot
+                if(Lidar_msg.ranges[i]  < 1.0){
+                    //rotate to the left
+                    rotateDir = 1;
+                    move(FORWARD_SPEED_MPS, rotateDir * ROTATE_SPEED_RADPS);
+                }
+                if(Lidar_msg.ranges[i] > 1.10){
+                    //rotate to the right
+                    rotateDir = -1;
+                    move(FORWARD_SPEED_MPS, rotateDir * ROTATE_SPEED_RADPS);
+                }
+        }
+        closestRange = 2;
+        for (unsigned int i=490 ; i <580; i++) { //Check the front of the robot
+            if (Lidar_msg.ranges[i] < closestRange) {
+                closestRange = Lidar_msg.ranges[i];
+                }
+        }
+        ROS_INFO_STREAM(closestRange);
+        int flag = 0;
+        if(closestRange < 1.5){
+
+
+            //and slow down
+            if(FORWARD_SPEED_MPS >0.10){
+            FORWARD_SPEED_MPS = FORWARD_SPEED_MPS - 0.04;
             }
+            ROTATE_SPEED_RADPS = ROTATE_SPEED_RADPS + 0.35;
         }
 
+        if(closestRange==2){
+            ROTATE_SPEED_RADPS = M_PI / 2.5;
+            FORWARD_SPEED_MPS = 1.0;
+        }
+        ROS_INFO_STREAM(flag);
+        ROS_INFO_STREAM(FORWARD_SPEED_MPS);
+
+        //check for worst case scenario
+        if(Lidar_msg.ranges[540] < 0.5 && Lidar_msg.ranges[10] < 5){
+            ROS_INFO_STREAM("WORSTCASD");
+            //rotate right immediatly
+            FORWARD_SPEED_MPS = 0.3;
+            rotateDir = 1;
+            // rotate for second
+            int timer = 1;
+            while(timer<500){
+                move(0,rotateDir * ROTATE_SPEED_RADPS);
+                timer++;
+            }
+        }
 
 
 
