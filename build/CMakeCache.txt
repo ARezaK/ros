@@ -265,26 +265,11 @@ actionlib_DIR:PATH=/opt/ros/hydro/share/actionlib/cmake
 //The directory containing a CMake configuration file for actionlib_msgs.
 actionlib_msgs_DIR:PATH=/opt/ros/hydro/share/actionlib_msgs/cmake
 
-//The directory containing a CMake configuration file for angles.
-angles_DIR:PATH=/opt/ros/hydro/share/angles/cmake
-
 //The directory containing a CMake configuration file for catkin.
 catkin_DIR:PATH=/opt/ros/hydro/share/catkin/cmake
 
-//The directory containing a CMake configuration file for control_toolbox.
-control_toolbox_DIR:PATH=/opt/ros/hydro/share/control_toolbox/cmake
-
 //The directory containing a CMake configuration file for cpp_common.
 cpp_common_DIR:PATH=/opt/ros/hydro/share/cpp_common/cmake
-
-//The directory containing a CMake configuration file for diagnostic_msgs.
-diagnostic_msgs_DIR:PATH=/opt/ros/hydro/share/diagnostic_msgs/cmake
-
-//The directory containing a CMake configuration file for diagnostic_updater.
-diagnostic_updater_DIR:PATH=/opt/ros/hydro/share/diagnostic_updater/cmake
-
-//The directory containing a CMake configuration file for dynamic_reconfigure.
-dynamic_reconfigure_DIR:PATH=/opt/ros/hydro/share/dynamic_reconfigure/cmake
 
 //The directory containing a CMake configuration file for gencpp.
 gencpp_DIR:PATH=/opt/ros/hydro/share/gencpp/cmake
@@ -326,9 +311,6 @@ gtest_force_shared_crt:BOOL=OFF
 //Dependencies for the target
 gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
-//The directory containing a CMake configuration file for joy.
-joy_DIR:PATH=/opt/ros/hydro/share/joy/cmake
-
 //Path to a library.
 lib:FILEPATH=/opt/ros/hydro/lib/libxmlrpcpp.so
 
@@ -357,13 +339,10 @@ rand_walk_w_goal_BINARY_DIR:STATIC=/home/ameer/Desktop/catkin_ws/build/rand_walk
 rand_walk_w_goal_SOURCE_DIR:STATIC=/home/ameer/Desktop/catkin_ws/src/rand_walk_w_goal
 
 //Value Computed by CMake
-random_walk_BINARY_DIR:STATIC=/home/ameer/Desktop/catkin_ws/build/udm_ros_Tutorial/random_walk
+random_walk_BINARY_DIR:STATIC=/home/ameer/Desktop/catkin_ws/build/random_walk
 
 //Value Computed by CMake
-random_walk_SOURCE_DIR:STATIC=/home/ameer/Desktop/catkin_ws/src/udm_ros_Tutorial/random_walk
-
-//The directory containing a CMake configuration file for realtime_tools.
-realtime_tools_DIR:PATH=/opt/ros/hydro/share/realtime_tools/cmake
+random_walk_SOURCE_DIR:STATIC=/home/ameer/Desktop/catkin_ws/src/random_walk
 
 //The directory containing a CMake configuration file for rosconsole.
 rosconsole_DIR:PATH=/opt/ros/hydro/share/rosconsole/cmake
@@ -403,12 +382,6 @@ stageroscamcam_SOURCE_DIR:STATIC=/home/ameer/Desktop/catkin_ws/src/stageroscam
 
 //The directory containing a CMake configuration file for std_msgs.
 std_msgs_DIR:PATH=/opt/ros/hydro/share/std_msgs/cmake
-
-//Value Computed by CMake
-teleop_base_BINARY_DIR:STATIC=/home/ameer/Desktop/catkin_ws/build/udm_ros_Tutorial/teleop_base
-
-//Value Computed by CMake
-teleop_base_SOURCE_DIR:STATIC=/home/ameer/Desktop/catkin_ws/src/udm_ros_Tutorial/teleop_base
 
 //The directory containing a CMake configuration file for tf2.
 tf2_DIR:PATH=/opt/ros/hydro/share/tf2/cmake
@@ -579,8 +552,6 @@ CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 CMAKE_SKIP_RPATH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STRIP
 CMAKE_STRIP-ADVANCED:INTERNAL=1
-//uname command
-CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_USE_RELATIVE_PATHS
 CMAKE_USE_RELATIVE_PATHS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE

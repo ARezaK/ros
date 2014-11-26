@@ -62,7 +62,7 @@ RandomWalk::RandomWalk(ros::NodeHandle &nh) {
     rotateStartTime = ros::Time::now();     //initialize to current time
     rotateDuration = ros::Duration(0.f);    //0.0 duration type float
     rotateDir = 0;
-    ROTATE_SPEED_RADPS = M_PI / 4;
+    ROTATE_SPEED_RADPS = M_PI / 10;
     FORWARD_SPEED_MPS = 1.0;
 
 
@@ -129,69 +129,52 @@ void RandomWalk::commandCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
 void RandomWalk::processSensors() {
     ros::Rate rate(10); // Specify the FSM loop rate in Hz
     while (ros::ok()) { // Keep spinning loop until user presses Ctrl+C
-        // TODO: Either call:
-        //
-        //- move(0, ROTATE_SPEED_RADPS); // Rotate right
-        //
-        // or
-        //
-        //- move(FORWARD_SPEED_MPS, 0); // Move forward
-        //
-        // depending on the FSM state; also change the FSM state when appropriate
-
-    	// Analyze the Lidar_msg data and alter the robot state accordingly
-
         unsigned int minIndex = ceil((MIN_SCAN_ANGLE_RAD - Lidar_msg.angle_min) / Lidar_msg.angle_increment);
         unsigned int maxIndex = ceil((MAX_SCAN_ANGLE_RAD - Lidar_msg.angle_min) / Lidar_msg.angle_increment);
-        //ROS_INFO_STREAM(minIndex); //181
-       // ROS_INFO_STREAM(maxIndex); //900
 
-
-
-        float closestRange = Lidar_msg.ranges[minIndex];
-        //int colsestRange_index;
         ROS_INFO_STREAM("START");
-
-        for (unsigned int i=0 ; i <200; i++) { //Check the right of of the robot
-                if(Lidar_msg.ranges[i]  < 1.0){
+        //roslaunch rand_walk_w_goal random_walk.launch
+        for (unsigned int i=0 ; i <250; i++) { //Check the right and  of of the robot
+                if(Lidar_msg.ranges[i]  < 1.4){
                     //rotate to the left
                     rotateDir = 1;
                     move(FORWARD_SPEED_MPS, rotateDir * ROTATE_SPEED_RADPS);
                 }
-                if(Lidar_msg.ranges[i] > 1.10){
+                if(Lidar_msg.ranges[i] > 1.5){
                     //rotate to the right
                     rotateDir = -1;
                     move(FORWARD_SPEED_MPS, rotateDir * ROTATE_SPEED_RADPS);
                 }
         }
-        closestRange = 2;
+
+        float closestRange = 2;
         for (unsigned int i=490 ; i <580; i++) { //Check the front of the robot
             if (Lidar_msg.ranges[i] < closestRange) {
                 closestRange = Lidar_msg.ranges[i];
                 }
         }
         ROS_INFO_STREAM(closestRange);
-        int flag = 0;
-        if(closestRange < 1.5){
 
-
+        if(closestRange < 2){
             //and slow down
             if(FORWARD_SPEED_MPS >0.10){
             FORWARD_SPEED_MPS = FORWARD_SPEED_MPS - 0.04;
+
             }
+            //and i should probably start to rotate to the left a little
+            rotateDir = 1;
+            move(FORWARD_SPEED_MPS, rotateDir * ROTATE_SPEED_RADPS);
             ROTATE_SPEED_RADPS = ROTATE_SPEED_RADPS + 0.35;
         }
 
         if(closestRange==2){
             ROTATE_SPEED_RADPS = M_PI / 2.5;
-            FORWARD_SPEED_MPS = 1.0;
+            FORWARD_SPEED_MPS = 8.0;
         }
-        ROS_INFO_STREAM(flag);
-        ROS_INFO_STREAM(FORWARD_SPEED_MPS);
 
         //check for worst case scenario
         if(Lidar_msg.ranges[540] < 0.5 && Lidar_msg.ranges[10] < 5){
-            ROS_INFO_STREAM("WORSTCASD");
+            ROS_INFO_STREAM("WORSTCASE");
             //rotate right immediatly
             FORWARD_SPEED_MPS = 0.3;
             rotateDir = 1;
@@ -202,7 +185,6 @@ void RandomWalk::processSensors() {
                 timer++;
             }
         }
-
 
 
         ros::spinOnce(); // Need to call this function often to allow ROS to process incoming messages
