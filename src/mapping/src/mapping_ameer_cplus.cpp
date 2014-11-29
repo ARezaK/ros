@@ -347,17 +347,17 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
 
 
 
-    tf::TransformListener listener;
+    tf::TransformListener listener; //Initilize the two transofrm objects needed for getting the transform from map to base link
     tf::StampedTransform transform;
 
     try {
-        listener.waitForTransform("/map", "/base_link", ros::Time(0), ros::Duration(10.0) );
+        listener.waitForTransform("/map", "/base_link", ros::Time(0), ros::Duration(10.0) ); //Try to get the transform
         listener.lookupTransform("/map", "/base_link", ros::Time(0), transform);
     } catch (tf::TransformException ex) {
         ROS_ERROR("%s",ex.what());
     }
 
-    double map_x = transform.getOrigin().x();
+    double map_x = transform.getOrigin().x(); //Get the transformed coordinates
     double map_y = transform.getOrigin().y();
     double map_z = transform.getOrigin().z();
     ROS_INFO_STREAM("X" << transform.getOrigin().x());
@@ -371,7 +371,7 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
 
     ROS_INFO_STREAM("gridx " << grid_x);
     ROS_INFO_STREAM("gridy " << grid_y);
-    localmap_occup1.info.origin.position.x=map_x-25*full_map.info.resolution;
+    localmap_occup1.info.origin.position.x=map_x-25*full_map.info.resolution; //Set our position as center of the local map
     localmap_occup1.info.origin.position.y=map_y-25*full_map.info.resolution;
     localmap_occup1.info.origin.position.z=map_z;
 
@@ -379,22 +379,20 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
     ix2=(grid_x-25);	//in map coordinates
     iy2=(grid_y-25); 	// in map coordinates
     //UPDATE LOCAL MAPS
-    // you were disconnected
     ROS_INFO_STREAM("ix2 " << ix2);
     ROS_INFO_STREAM("iy2 " << iy2);
 
     int i = 0;
     for (int iy=iy2; iy<(iy2+50); iy++) {
         for (int ix=ix2; ix<(ix2+50); ix++) {
-            //ROS_INFO_STREAM("shit: " <<ix+(localmap_occup1.info.origin.position.x/full_map.info.resolution));
             localmap_occup1.data[i] = full_map.data[MAP_IDX(full_map.info.width, ix, iy)];
-            if(full_map.data[MAP_IDX(full_map.info.width, ix, iy)]==100) {	//left lane
+            if(full_map.data[MAP_IDX(full_map.info.width, ix, iy)]==100) {	//check if there is an obstacle there
                 dx=(ix-grid_x)*full_map.info.resolution;
                 dy=(iy-grid_y)*full_map.info.resolution;
                 dt=sqrt((dx*dx)+(dy*dy));
                 ang=(atan2(dy,dx));
                 index=floor((ang-localmap1.angle_min)/localmap1.angle_increment);
-                if(index<5000000){
+                if(index<5000000){ //Check to make sure we're accessing data that its actually possible for the lidar scanner to reach
                     localmap1.ranges[index]=dt;
                     localmap1.intensities[index]=0;		//left lane
                 }
@@ -402,7 +400,6 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
             ros::Time scan_time = ros::Time::now();
             localmap1.header.stamp = scan_time;
             localmap1.header.frame_id = "base_laser_link";
-
             i++;
         }
     }
