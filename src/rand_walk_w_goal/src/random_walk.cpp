@@ -129,63 +129,57 @@ void RandomWalk::commandCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
 void RandomWalk::processSensors() {
     ros::Rate rate(10); // Specify the FSM loop rate in Hz
     while (ros::ok()) { // Keep spinning loop until user presses Ctrl+C
-        unsigned int minIndex = ceil((MIN_SCAN_ANGLE_RAD - Lidar_msg.angle_min) / Lidar_msg.angle_increment);
-        unsigned int maxIndex = ceil((MAX_SCAN_ANGLE_RAD - Lidar_msg.angle_min) / Lidar_msg.angle_increment);
-
         ROS_INFO_STREAM("START");
         //roslaunch rand_walk_w_goal random_walk.launch
-        for (unsigned int i=0 ; i <250; i++) { //Check the right and  of of the robot
-                if(Lidar_msg.ranges[i]  < 1.4){
+        for (unsigned int i=0 ; i <250; i++) { //Check the right side of the robot. 250 b/c we want the right side up to ~30 degree angle
+                if(Lidar_msg.ranges[i]  < 1.4){ //If there is an object within 1.4 meters angle the robot towards the left
                     //rotate to the left
                     rotateDir = 1;
                     move(FORWARD_SPEED_MPS, rotateDir * ROTATE_SPEED_RADPS);
                 }
-                if(Lidar_msg.ranges[i] > 1.5){
+                if(Lidar_msg.ranges[i] > 1.5){ //"" angle the robot towards the right
                     //rotate to the right
                     rotateDir = -1;
                     move(FORWARD_SPEED_MPS, rotateDir * ROTATE_SPEED_RADPS);
                 }
         }
-
+        //******************************************************//
         float closestRange = 2;
         for (unsigned int i=490 ; i <580; i++) { //Check the front of the robot
             if (Lidar_msg.ranges[i] < closestRange) {
-                closestRange = Lidar_msg.ranges[i];
+                closestRange = Lidar_msg.ranges[i]; // if there is any ranges less than 2 meters set that as closest range
                 }
         }
         ROS_INFO_STREAM(closestRange);
 
         if(closestRange < 2){
-            //and slow down
             if(FORWARD_SPEED_MPS >0.10){
-            FORWARD_SPEED_MPS = FORWARD_SPEED_MPS - 0.04;
+            FORWARD_SPEED_MPS = FORWARD_SPEED_MPS - 0.04; //incrementally slow down but never stop (hence the > 0.1)
 
             }
-            //and i should probably start to rotate to the left a little
-            rotateDir = 1;
+            rotateDir = 1; //Rotate away from impendeing object
             move(FORWARD_SPEED_MPS, rotateDir * ROTATE_SPEED_RADPS);
-            ROTATE_SPEED_RADPS = ROTATE_SPEED_RADPS + 0.35;
+            ROTATE_SPEED_RADPS = ROTATE_SPEED_RADPS + 0.35; //Incrementally update your rotate speed
         }
 
-        if(closestRange==2){
+        if(closestRange==2){ //If closest range is back to 2 set everything back to default values
             ROTATE_SPEED_RADPS = M_PI / 2.5;
             FORWARD_SPEED_MPS = 8.0;
         }
 
+        //******************************************************//
         //check for worst case scenario
-        if(Lidar_msg.ranges[540] < 0.5 && Lidar_msg.ranges[10] < 5){
+        if(Lidar_msg.ranges[540] < 0.5 && Lidar_msg.ranges[10] < 5){ //Check if an object is directly in front of this and an object is to the right of us
             ROS_INFO_STREAM("WORSTCASE");
-            //rotate right immediatly
-            FORWARD_SPEED_MPS = 0.3;
+            FORWARD_SPEED_MPS = 0.3; // SLOW DOWN
             rotateDir = 1;
-            // rotate for second
+            // rotate for 1.5 seconds
             int timer = 1;
             while(timer<500){
-                move(0,rotateDir * ROTATE_SPEED_RADPS);
+                move(FORWARD_SPEED_MPS,rotateDir * ROTATE_SPEED_RADPS);
                 timer++;
             }
         }
-
 
         ros::spinOnce(); // Need to call this function often to allow ROS to process incoming messages
         rate.sleep(); // Sleep for the rest of the cycle, to enforce the FSM loop rate
