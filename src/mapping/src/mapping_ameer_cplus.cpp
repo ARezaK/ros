@@ -449,12 +449,14 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
         for (int ix=ix2; ix<(ix2+50); ix++) {
             localmap_occup1.data[i] = full_map.data[MAP_IDX(full_map.info.width, ix, iy)];
             if(full_map.data[MAP_IDX(full_map.info.width, ix, iy)]==100) {	//check if there is an obstacle there
-                convertLocalMaptoLidar(ix, iy, grid_x, grid_y);
+                convertLocalMaptoLidar(ix, iy, grid_x, grid_y, 100);
             }
-            //Need to add in the other possiblites here like left, right lane, etc
+            //Need to add in the other possiblites here like left, right lane, etc once image processing is done
             ros::Time scan_time = ros::Time::now();
             localmap1.header.stamp = scan_time; //used for publishing local map
             localmap1.header.frame_id = "base_laser_link";
+            localmap2.header.stamp = scan_time; //used for publishing local map
+            localmap2.header.frame_id = "base_laser_link";
             i++;
         }
     }
@@ -470,11 +472,11 @@ void convertLocalMaptoLidar(int ix, int iy, int grid_x, int grid_y, int id){
      75 = blue flag
      100 = obstacle this one is only used for testing stuff
      */
-    if(id==100){
-        dx=(ix-grid_x)*full_map.info.resolution;
-        dy=(iy-grid_y)*full_map.info.resolution;
-        dt=sqrt((dx*dx)+(dy*dy));
-        ang=(atan2(dy,dx));
+    dx=(ix-grid_x)*full_map.info.resolution;
+    dy=(iy-grid_y)*full_map.info.resolution;
+    dt=sqrt((dx*dx)+(dy*dy));
+    ang=(atan2(dy,dx));
+    if(id==100){ //only for testing
         index=floor((ang-localmap1.angle_min)/localmap1.angle_increment);
         if(index<5000000){ //Check to make sure we're accessing data that its actually possible for the lidar scanner to reach
             localmap1.ranges[index]=dt;
@@ -482,10 +484,6 @@ void convertLocalMaptoLidar(int ix, int iy, int grid_x, int grid_y, int id){
         }
     }
     if(id==30 || id==60){
-        dx=(ix-grid_x)*full_map.info.resolution;
-        dy=(iy-grid_y)*full_map.info.resolution;
-        dt=sqrt((dx*dx)+(dy*dy));
-        ang=(atan2(dy,dx));
         index=floor((ang-localmap1.angle_min)/localmap1.angle_increment);
         if(index<5000000){ //Check to make sure we're accessing data that its actually possible for the lidar scanner to reach
             localmap1.ranges[index]=dt;
@@ -498,10 +496,6 @@ void convertLocalMaptoLidar(int ix, int iy, int grid_x, int grid_y, int id){
         }
     }
     if(id==45){
-        dx=(ix-grid_x)*full_map.info.resolution;
-        dy=(iy-grid_y)*full_map.info.resolution;
-        dt=sqrt((dx*dx)+(dy*dy));
-        ang=(atan2(dy,dx));
         index=floor((ang-localmap1.angle_min)/localmap1.angle_increment);
         if ((index!=0) && (index<1081)) {
             localmap1.ranges[index]=dt;
@@ -517,10 +511,6 @@ void convertLocalMaptoLidar(int ix, int iy, int grid_x, int grid_y, int id){
         }
     }
     if(id==25 || id==75){
-        dx=(ix-grid_x)*full_map.info.resolution;
-        dy=(iy-grid_y)*full_map.info.resolution;
-        dt=sqrt((dx*dx)+(dy*dy));
-        ang=(atan2(dy,dx));
         index=floor((ang-localmap1.angle_min)/localmap2.angle_increment);
         localmap2.ranges[index]=dt;
         if(id==25) {
