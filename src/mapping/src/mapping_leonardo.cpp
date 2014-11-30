@@ -381,7 +381,7 @@ void poseCallback(const nav_msgs::Odometry::ConstPtr& msg) {
 						localmap2.intensities[index]=1;		//blue flag
 					}
 				
-				}
+					}
 				}
 				
 			} 
