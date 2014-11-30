@@ -27,14 +27,12 @@
       <file leaf-file-name="mapping_ameer_cplus.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mapping/src/mapping_ameer_cplus.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68670887" vertical-offset="1420" max-vertical-offset="2052">
-              <caret line="373" column="61" selection-start-line="373" selection-start-column="61" selection-end-line="373" selection-end-column="61" />
+            <state vertical-scroll-proportion="0.51582277" vertical-offset="2554" max-vertical-offset="4176">
+              <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
               <folding>
-                <element signature="e#6700#17057#0" expanded="false" />
-                <element signature="e#17080#20318#0" expanded="false" />
-                <element signature="e#20322#24030#0" expanded="false" />
-                <element signature="e#24032#26045#0" expanded="false" />
-                <element signature="e#26047#28030#0" expanded="false" />
+                <element signature="e#8878#19235#0" expanded="false" />
+                <element signature="e#19258#22496#0" expanded="false" />
+                <element signature="e#22500#25891#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -43,8 +41,8 @@
       <file leaf-file-name="mapping_leonardo.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mapping/src/mapping_leonardo.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="6426" max-vertical-offset="16308">
-              <caret line="371" column="56" selection-start-line="370" selection-start-column="24" selection-end-line="371" selection-end-column="56" />
+            <state vertical-scroll-proportion="-15.214286" vertical-offset="4344" max-vertical-offset="16308">
+              <caret line="265" column="23" selection-start-line="265" selection-start-column="16" selection-end-line="265" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -168,6 +166,11 @@
       </pane>
     </panes>
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+  </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
     <configuration />
@@ -222,7 +225,9 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -231,33 +236,29 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="100">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#6700#17057#0" expanded="false" />
-            <element signature="e#17080#20318#0" expanded="false" />
-            <element signature="e#20322#24030#0" expanded="false" />
-            <element signature="e#24032#26045#0" expanded="false" />
-            <element signature="e#26047#28030#0" expanded="false" />
+            <element signature="e#8878#19235#0" expanded="false" />
+            <element signature="e#19258#22496#0" expanded="false" />
+            <element signature="e#22500#25891#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mapping/src/mapping_leonardo.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="6426" max-vertical-offset="16308">
-          <caret line="371" column="56" selection-start-line="370" selection-start-column="24" selection-end-line="371" selection-end-column="56" />
+        <state vertical-scroll-proportion="-15.214286" vertical-offset="4344" max-vertical-offset="16308">
+          <caret line="265" column="23" selection-start-line="265" selection-start-column="16" selection-end-line="265" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mapping/src/mapping_ameer_cplus.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68670887" vertical-offset="1420" max-vertical-offset="2052">
-          <caret line="373" column="61" selection-start-line="373" selection-start-column="61" selection-end-line="373" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.51582277" vertical-offset="2554" max-vertical-offset="4176">
+          <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
           <folding>
-            <element signature="e#6700#17057#0" expanded="false" />
-            <element signature="e#17080#20318#0" expanded="false" />
-            <element signature="e#20322#24030#0" expanded="false" />
-            <element signature="e#24032#26045#0" expanded="false" />
-            <element signature="e#26047#28030#0" expanded="false" />
+            <element signature="e#8878#19235#0" expanded="false" />
+            <element signature="e#19258#22496#0" expanded="false" />
+            <element signature="e#22500#25891#0" expanded="false" />
           </folding>
         </state>
       </provider>
