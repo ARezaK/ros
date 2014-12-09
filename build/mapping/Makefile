@@ -160,29 +160,29 @@ mapping/fast:
 	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f mapping/CMakeFiles/mapping.dir/build.make mapping/CMakeFiles/mapping.dir/build
 .PHONY : mapping/fast
 
-src/mapping_ameer_cplus.o: src/mapping_ameer_cplus.cpp.o
-.PHONY : src/mapping_ameer_cplus.o
+src/mapping_ameer.o: src/mapping_ameer.cpp.o
+.PHONY : src/mapping_ameer.o
 
 # target to build an object file
-src/mapping_ameer_cplus.cpp.o:
-	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f mapping/CMakeFiles/mapping.dir/build.make mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o
-.PHONY : src/mapping_ameer_cplus.cpp.o
+src/mapping_ameer.cpp.o:
+	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f mapping/CMakeFiles/mapping.dir/build.make mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o
+.PHONY : src/mapping_ameer.cpp.o
 
-src/mapping_ameer_cplus.i: src/mapping_ameer_cplus.cpp.i
-.PHONY : src/mapping_ameer_cplus.i
+src/mapping_ameer.i: src/mapping_ameer.cpp.i
+.PHONY : src/mapping_ameer.i
 
 # target to preprocess a source file
-src/mapping_ameer_cplus.cpp.i:
-	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f mapping/CMakeFiles/mapping.dir/build.make mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.i
-.PHONY : src/mapping_ameer_cplus.cpp.i
+src/mapping_ameer.cpp.i:
+	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f mapping/CMakeFiles/mapping.dir/build.make mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.i
+.PHONY : src/mapping_ameer.cpp.i
 
-src/mapping_ameer_cplus.s: src/mapping_ameer_cplus.cpp.s
-.PHONY : src/mapping_ameer_cplus.s
+src/mapping_ameer.s: src/mapping_ameer.cpp.s
+.PHONY : src/mapping_ameer.s
 
 # target to generate assembly for a file
-src/mapping_ameer_cplus.cpp.s:
-	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f mapping/CMakeFiles/mapping.dir/build.make mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.s
-.PHONY : src/mapping_ameer_cplus.cpp.s
+src/mapping_ameer.cpp.s:
+	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f mapping/CMakeFiles/mapping.dir/build.make mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.s
+.PHONY : src/mapping_ameer.cpp.s
 
 # Help Target
 help:
@@ -198,9 +198,9 @@ help:
 	@echo "... mapping"
 	@echo "... rebuild_cache"
 	@echo "... test"
-	@echo "... src/mapping_ameer_cplus.o"
-	@echo "... src/mapping_ameer_cplus.i"
-	@echo "... src/mapping_ameer_cplus.s"
+	@echo "... src/mapping_ameer.o"
+	@echo "... src/mapping_ameer.i"
+	@echo "... src/mapping_ameer.s"
 .PHONY : help
 
 

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/ameer/Desktop/catkin_ws/src/mapping/src/mapping_ameer_cplus.cpp
+/home/ameer/Desktop/catkin_ws/src/mapping/src/mapping_ameer.cpp
 ros/ros.h
 /home/ameer/Desktop/catkin_ws/src/mapping/src/ros/ros.h
 geometry_msgs/Twist.h
@@ -57,6 +57,8 @@ opencv/cxcore.h
 /home/ameer/Desktop/catkin_ws/src/mapping/src/opencv/cxcore.h
 opencv/highgui.h
 /home/ameer/Desktop/catkin_ws/src/mapping/src/opencv/highgui.h
+unistd.h
+-
 tf/transform_listener.h
 -
 

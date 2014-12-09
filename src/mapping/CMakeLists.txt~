@@ -112,7 +112,7 @@ include_directories(include
 
 
 
-  add_executable(mapping src/mapping_ameer.cpp)
+  add_executable(mapping src/mapping_ameer_cplus.cpp)
  # add_executable(mapping src/mapping_leonardo.cpp)
 
 

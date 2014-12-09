@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ameer/Desktop/catkin_ws/src/mapping/src/mapping_ameer_cplus.cpp" "/home/ameer/Desktop/catkin_ws/build/mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o"
+  "/home/ameer/Desktop/catkin_ws/src/mapping/src/mapping_ameer.cpp" "/home/ameer/Desktop/catkin_ws/build/mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

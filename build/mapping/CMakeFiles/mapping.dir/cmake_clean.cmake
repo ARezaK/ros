@@ -1,5 +1,5 @@
 FILE(REMOVE_RECURSE
-  "CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o"
+  "CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o"
   "/home/ameer/Desktop/catkin_ws/devel/lib/mapping/mapping.pdb"
   "/home/ameer/Desktop/catkin_ws/devel/lib/mapping/mapping"
 )

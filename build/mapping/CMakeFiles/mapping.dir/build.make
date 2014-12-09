@@ -46,37 +46,37 @@ include mapping/CMakeFiles/mapping.dir/progress.make
 # Include the compile flags for this target's objects.
 include mapping/CMakeFiles/mapping.dir/flags.make
 
-mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o: mapping/CMakeFiles/mapping.dir/flags.make
-mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o: /home/ameer/Desktop/catkin_ws/src/mapping/src/mapping_ameer_cplus.cpp
+mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o: mapping/CMakeFiles/mapping.dir/flags.make
+mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o: /home/ameer/Desktop/catkin_ws/src/mapping/src/mapping_ameer.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/ameer/Desktop/catkin_ws/build/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o"
-	cd /home/ameer/Desktop/catkin_ws/build/mapping && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o -c /home/ameer/Desktop/catkin_ws/src/mapping/src/mapping_ameer_cplus.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o"
+	cd /home/ameer/Desktop/catkin_ws/build/mapping && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o -c /home/ameer/Desktop/catkin_ws/src/mapping/src/mapping_ameer.cpp
 
-mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.i"
-	cd /home/ameer/Desktop/catkin_ws/build/mapping && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ameer/Desktop/catkin_ws/src/mapping/src/mapping_ameer_cplus.cpp > CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.i
+mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mapping.dir/src/mapping_ameer.cpp.i"
+	cd /home/ameer/Desktop/catkin_ws/build/mapping && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ameer/Desktop/catkin_ws/src/mapping/src/mapping_ameer.cpp > CMakeFiles/mapping.dir/src/mapping_ameer.cpp.i
 
-mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.s"
-	cd /home/ameer/Desktop/catkin_ws/build/mapping && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ameer/Desktop/catkin_ws/src/mapping/src/mapping_ameer_cplus.cpp -o CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.s
+mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mapping.dir/src/mapping_ameer.cpp.s"
+	cd /home/ameer/Desktop/catkin_ws/build/mapping && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ameer/Desktop/catkin_ws/src/mapping/src/mapping_ameer.cpp -o CMakeFiles/mapping.dir/src/mapping_ameer.cpp.s
 
-mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o.requires:
-.PHONY : mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o.requires
+mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o.requires:
+.PHONY : mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o.requires
 
-mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o.provides: mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o.requires
-	$(MAKE) -f mapping/CMakeFiles/mapping.dir/build.make mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o.provides.build
-.PHONY : mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o.provides
+mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o.provides: mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o.requires
+	$(MAKE) -f mapping/CMakeFiles/mapping.dir/build.make mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o.provides.build
+.PHONY : mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o.provides
 
-mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o.provides.build: mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o
+mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o.provides.build: mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o
 
 # Object files for target mapping
 mapping_OBJECTS = \
-"CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o"
+"CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o"
 
 # External object files for target mapping
 mapping_EXTERNAL_OBJECTS =
 
-/home/ameer/Desktop/catkin_ws/devel/lib/mapping/mapping: mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o
+/home/ameer/Desktop/catkin_ws/devel/lib/mapping/mapping: mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o
 /home/ameer/Desktop/catkin_ws/devel/lib/mapping/mapping: /opt/ros/hydro/lib/libtf.so
 /home/ameer/Desktop/catkin_ws/devel/lib/mapping/mapping: /opt/ros/hydro/lib/libtf2_ros.so
 /home/ameer/Desktop/catkin_ws/devel/lib/mapping/mapping: /opt/ros/hydro/lib/libactionlib.so
@@ -108,7 +108,7 @@ mapping_EXTERNAL_OBJECTS =
 mapping/CMakeFiles/mapping.dir/build: /home/ameer/Desktop/catkin_ws/devel/lib/mapping/mapping
 .PHONY : mapping/CMakeFiles/mapping.dir/build
 
-mapping/CMakeFiles/mapping.dir/requires: mapping/CMakeFiles/mapping.dir/src/mapping_ameer_cplus.cpp.o.requires
+mapping/CMakeFiles/mapping.dir/requires: mapping/CMakeFiles/mapping.dir/src/mapping_ameer.cpp.o.requires
 .PHONY : mapping/CMakeFiles/mapping.dir/requires
 
 mapping/CMakeFiles/mapping.dir/clean:
