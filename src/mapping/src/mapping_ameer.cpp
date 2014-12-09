@@ -28,8 +28,6 @@
 #include "opencv/cxcore.h"                              //not used
 #include "opencv/highgui.h"                             //not used
 #include <unistd.h>
-unsigned int sleep(unsigned int seconds);
-
 #include <tf/transform_listener.h>
 //********************************************************************************************************************************************
 
@@ -91,6 +89,8 @@ geometry_msgs::Point32 leftlane;                    //not used
 geometry_msgs::Point32 rightlane;                   //not used
 geometry_msgs::Point32 gpstail;                     //not used
 bool setup=true;
+
+sensor_msgs::Image image_used_for_ll;
 //***************************************End of global variables**************************************************************************************
 
 void convertLocalMaptoLidar(int ix, int iy, int grid_x, int grid_y, int id){
@@ -360,9 +360,11 @@ void retrieveMapCallback(const nav_msgs::OccupancyGrid::ConstPtr& msg){
     ROS_INFO_STREAM("GOT MAP");
     //the logical way to set this up would be to get the map from gmapping first
     // and then initilize everything based off of that
+    //obviously the way this works is it replaces full_map each time so need to put in a way that will
+    // not replace it but add to it.
     full_map.info = msg->info;
 	ROS_INFO_STREAM(full_map.info.resolution);
-ROS_INFO_STREAM(msg->info.origin.position.x);
+    ROS_INFO_STREAM(msg->info.origin.position.x);
 	ROS_INFO_STREAM(full_map.info.origin.position.x);
     full_map.header = msg->header;
     full_map.data = msg->data;
@@ -531,6 +533,28 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
 
 }
 
+
+void convertcameraimage(const sensor_msgs::Image::ConstPtr& msg){
+    ROS_INFO_STREAM("GOT IMAGE");
+    image_used_for_ll.header = msg->header;
+    image_used_for_ll.height = msg->height;
+    image_used_for_ll.width = msg->width;
+    image_used_for_ll.encoding = msg->encoding;
+    image_used_for_ll.is_bigendian = msg->is_bigendian;
+    image_used_for_ll.step = msg->step;
+    image_used_for_ll.data = msg->data;
+    int i = 0;
+    int size = msg->step*msg->height;
+    for(i=0;i<size-1;i++){
+        if(msg->data[i]==0){
+            image_used_for_ll.data[i]=255;
+        }
+        else{
+            image_used_for_ll.data[i]=0;
+        }
+    }
+
+}
 	
 int main(int argc, char **argv) {
     ros::init(argc, argv, "the_mapping");
@@ -558,8 +582,11 @@ int main(int argc, char **argv) {
     localmap2.ranges.resize(1081);
     localmap2.intensities.resize(1081);
 
+    //image
+
 
     //SUBSCRIBE/PUBLISH TO:
+    /*
     ros::Subscriber poseSub = n.subscribe("base_pose_ground_truth", 1, 	extractLocalMap);	//change this so it subscribes to the tf
     ros::Subscriber mapSub = n.subscribe("map", 1, retrieveMapCallback); //Subscribe to gmapping map
     ros::Publisher mappingPub = n.advertise<nav_msgs::OccupancyGrid>("full_map", 1);	//Publish the Full map
@@ -567,18 +594,23 @@ int main(int argc, char **argv) {
 
     ros::Publisher localmap1Pub = n.advertise<sensor_msgs::LaserScan>("localmap1", 1); //Local1 map (lanelines)
     //ros::Publisher localmap2Pub = n.advertise<sensor_msgs::LaserScan>("localmap2", 1); //Local2 map (flags)
+    */
+
+    ros::Subscriber imageSub = n.subscribe("image",1,convertcameraimage);
+    ros::Publisher imagePub = n.advertise<sensor_msgs::Image>("convertimage", 1); //Local1 map (lanelines)
 
     ros::Rate rate(45);
 
     while(ros::ok()) {
+        /*
         mappingPub.publish(full_map);
         localmappingPub.publish(localmap_occup1);
-        localmap1Pub.publish(localmap1);
+        localmap1Pub.publish(localmap1);*/
         //localmap1Pub.publish(localmap1);
         //localmap2Pub.publish(localmap2);
-        //forgoalPub.publish(forgoal_left);
-        //forgoalPub.publish(forgoal_right);
-        //forgoalPub.publish(forgoal_gps);
+
+        imagePub.publish(image_used_for_ll);
+
         //ROS_INFO_STREAM("ros is ok");
 
         ros::spinOnce();

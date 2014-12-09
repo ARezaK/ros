@@ -116,10 +116,10 @@ void convertLocalMaptoLidar(int ix, int iy, int grid_x, int grid_y, int id){
     if(id==100){ //only for testing
 	//ROS_INFO_STREAM("ID = 100");
         index=floor((ang-localmap1.angle_min)/localmap1.angle_increment);
-        /*if(index<5000000){ //Check to make sure we're accessing data that its actually possible for the lidar scanner to reach
+        if(index<5000000){ //Check to make sure we're accessing data that its actually possible for the lidar scanner to reach
             localmap1.ranges[index]=dt;
             localmap1.intensities[index]=0;		//left lane
-        }*/
+        }
     }
     if(id==30 || id==60){
         index=floor((ang-localmap1.angle_min)/localmap1.angle_increment);
