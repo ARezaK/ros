@@ -72,7 +72,7 @@ nav_msgs::OccupancyGrid full_map;                           // General Map ...th
 nav_msgs::OccupancyGrid unkown_ll;                          //Lane lines map linelanes
 nav_msgs::OccupancyGrid l_lane_map;                          //Map of left lanes
 nav_msgs::OccupancyGrid r_lane_map;                          //Map of right lanes
-nav_msgs::OccupancyGrid posit_map;                          //Positions map
+nav_msgs::OccupancyGrid posit_map;                          //Positions map - Nobody ever uses this?
 nav_msgs::OccupancyGrid pred_l;                          //Predicted left
 nav_msgs::OccupancyGrid pred_r;                          //Predicted right
 nav_msgs::OccupancyGrid map_region;               //Map of regions to classify left or right lanes (negative for left, positive for right)
@@ -278,10 +278,11 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
     } //end of second for
 
     //I belive everything below this is for ray tracing
+    /*commented out the for loop below b/c it doesnt make sense and i think he used it for testing
     for (unsigned int i = 0; i< (full_map.info.width*full_map.info.height); i++) {
         if (full_map.data[i]==22)
             full_map.data[i]=0;
-    }
+    }*/
     for (unsigned int i=0; i<40 ; i++) {
         sumldx=sumldx+ dleftx[i];
         sumldy=sumldy+ dlefty[i];
@@ -523,8 +524,11 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
                 convertLocalMaptoLidar(ix, iy, grid_x, grid_y, 100);
             }
             //Need to add in the other possiblites here like left, right lane, etc once image processing is done
-		          
-	ros::Time scan_time = ros::Time::now();
+            //as well as the goal
+
+
+
+	        ros::Time scan_time = ros::Time::now();
             localmap1.header.stamp = scan_time; //used for publishing local map
             localmap1.header.frame_id = "base_laser_link";
             localmap2.header.stamp = scan_time; //used for publishing local map
