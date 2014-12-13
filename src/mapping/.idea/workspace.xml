@@ -2,40 +2,41 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true">
     <generated>
-      <config projectName="mapping" targetName="geometry_msgs_generate_messages_lisp" />
-      <config projectName="mapping" targetName="std_msgs_generate_messages_cpp" />
-      <config projectName="mapping" targetName="actionlib_generate_messages_cpp" />
-      <config projectName="mapping" targetName="actionlib_msgs_generate_messages_py" />
-      <config projectName="mapping" targetName="doxygen" />
-      <config projectName="mapping" targetName="actionlib_msgs_generate_messages_cpp" />
-      <config projectName="mapping" targetName="actionlib_generate_messages_py" />
-      <config projectName="mapping" targetName="std_msgs_generate_messages_py" />
-      <config projectName="mapping" targetName="tf_generate_messages_lisp" />
-      <config projectName="mapping" targetName="std_msgs_generate_messages_lisp" />
-      <config projectName="mapping" targetName="rosgraph_msgs_generate_messages_py" />
-      <config projectName="mapping" targetName="run_tests" />
-      <config projectName="mapping" targetName="tf_generate_messages_py" />
-      <config projectName="mapping" targetName="clean_test_results" />
-      <config projectName="mapping" targetName="rosgraph_msgs_generate_messages_lisp" />
-      <config projectName="mapping" targetName="tf2_msgs_generate_messages_lisp" />
-      <config projectName="mapping" targetName="tf2_msgs_generate_messages_py" />
-      <config projectName="mapping" targetName="roscpp_generate_messages_cpp" />
-      <config projectName="mapping" targetName="geometry_msgs_generate_messages_py" />
-      <config projectName="mapping" targetName="gtest" />
-      <config projectName="mapping" targetName="gtest_main" />
-      <config projectName="mapping" targetName="tests" />
-      <config projectName="mapping" targetName="roscpp_generate_messages_py" />
-      <config projectName="mapping" targetName="sensor_msgs_generate_messages_lisp" />
       <config projectName="mapping" targetName="mapping" />
-      <config projectName="mapping" targetName="actionlib_generate_messages_lisp" />
-      <config projectName="mapping" targetName="tf2_msgs_generate_messages_cpp" />
       <config projectName="mapping" targetName="roscpp_generate_messages_lisp" />
-      <config projectName="mapping" targetName="actionlib_msgs_generate_messages_lisp" />
-      <config projectName="mapping" targetName="geometry_msgs_generate_messages_cpp" />
       <config projectName="mapping" targetName="tf_generate_messages_cpp" />
-      <config projectName="mapping" targetName="sensor_msgs_generate_messages_cpp" />
-      <config projectName="mapping" targetName="rosgraph_msgs_generate_messages_cpp" />
+      <config projectName="mapping" targetName="actionlib_generate_messages_cpp" />
+      <config projectName="mapping" targetName="roscpp_generate_messages_py" />
+      <config projectName="mapping" targetName="gtest_main" />
+      <config projectName="mapping" targetName="sensor_msgs_generate_messages_lisp" />
+      <config projectName="mapping" targetName="tf2_msgs_generate_messages_cpp" />
+      <config projectName="mapping" targetName="tf_generate_messages_py" />
       <config projectName="mapping" targetName="sensor_msgs_generate_messages_py" />
+      <config projectName="mapping" targetName="std_msgs_generate_messages_cpp" />
+      <config projectName="mapping" targetName="doxygen" />
+      <config projectName="mapping" targetName="afl" />
+      <config projectName="mapping" targetName="actionlib_generate_messages_lisp" />
+      <config projectName="mapping" targetName="geometry_msgs_generate_messages_py" />
+      <config projectName="mapping" targetName="actionlib_msgs_generate_messages_py" />
+      <config projectName="mapping" targetName="actionlib_msgs_generate_messages_lisp" />
+      <config projectName="mapping" targetName="gtest" />
+      <config projectName="mapping" targetName="roscpp_generate_messages_cpp" />
+      <config projectName="mapping" targetName="std_msgs_generate_messages_py" />
+      <config projectName="mapping" targetName="tf2_msgs_generate_messages_py" />
+      <config projectName="mapping" targetName="geometry_msgs_generate_messages_lisp" />
+      <config projectName="mapping" targetName="rosgraph_msgs_generate_messages_lisp" />
+      <config projectName="mapping" targetName="clean_test_results" />
+      <config projectName="mapping" targetName="tf_generate_messages_lisp" />
+      <config projectName="mapping" targetName="actionlib_generate_messages_py" />
+      <config projectName="mapping" targetName="rosgraph_msgs_generate_messages_py" />
+      <config projectName="mapping" targetName="actionlib_msgs_generate_messages_cpp" />
+      <config projectName="mapping" targetName="rosgraph_msgs_generate_messages_cpp" />
+      <config projectName="mapping" targetName="std_msgs_generate_messages_lisp" />
+      <config projectName="mapping" targetName="tf2_msgs_generate_messages_lisp" />
+      <config projectName="mapping" targetName="geometry_msgs_generate_messages_cpp" />
+      <config projectName="mapping" targetName="sensor_msgs_generate_messages_cpp" />
+      <config projectName="mapping" targetName="run_tests" />
+      <config projectName="mapping" targetName="tests" />
     </generated>
   </component>
   <component name="ChangeListManager">
@@ -59,11 +60,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="mapping_ameer.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mapping_ameer.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mapping_ameer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29099306" vertical-offset="1620" max-vertical-offset="3132">
-              <caret line="547" column="27" selection-start-line="547" selection-start-column="27" selection-end-line="547" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1144" max-vertical-offset="3150">
+              <caret line="356" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="619" selection-end-column="0" />
               <folding>
                 <element signature="e#6756#8965#0" expanded="false" />
                 <element signature="e#8968#19325#0" expanded="false" />
@@ -74,12 +75,36 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ameers_fake_lane_lines.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ameers_fake_lane_lines.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.3657056" vertical-offset="619" max-vertical-offset="1278">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding>
+                <element signature="e#136#156#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.76" vertical-offset="2430" max-vertical-offset="3312">
+              <caret line="143" column="3" selection-start-line="143" selection-start-column="3" selection-end-line="143" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/mapping_ameer.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/ameers_fake_lane_lines.cpp" />
       </list>
     </option>
   </component>
@@ -87,8 +112,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="113" />
-    <option name="y" value="52" />
+    <option name="x" value="262" />
+    <option name="y" value="50" />
     <option name="width" value="1123" />
     <option name="height" value="783" />
   </component>
@@ -174,6 +199,9 @@
     <property name="recentsLimit" value="5" />
   </component>
   <component name="RunManager" selected="Application.actionlib_generate_messages_cpp">
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="mapping" TARGET_NAME="actionlib_generate_messages_cpp" CONFIG_NAME="Debug">
       <envs />
       <method />
@@ -314,7 +342,11 @@
       <envs />
       <method />
     </configuration>
-    <list size="34">
+    <configuration default="false" name="afl" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS="FALSE" PROJECT_NAME="mapping" TARGET_NAME="afl" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <list size="35">
       <item index="0" class="java.lang.String" itemvalue="Application.actionlib_generate_messages_cpp" />
       <item index="1" class="java.lang.String" itemvalue="Application.actionlib_generate_messages_lisp" />
       <item index="2" class="java.lang.String" itemvalue="Application.actionlib_generate_messages_py" />
@@ -349,6 +381,7 @@
       <item index="31" class="java.lang.String" itemvalue="Application.tf_generate_messages_cpp" />
       <item index="32" class="java.lang.String" itemvalue="Application.tf_generate_messages_lisp" />
       <item index="33" class="java.lang.String" itemvalue="Application.tf_generate_messages_py" />
+      <item index="34" class="java.lang.String" itemvalue="Application.afl" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -365,27 +398,27 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="113" y="52" width="1123" height="783" extended-state="0" />
-    <editor active="false" />
+    <frame x="262" y="50" width="1123" height="783" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32944608" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32944608" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24977699" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -406,19 +439,52 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/mapping_ameer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29099306" vertical-offset="1620" max-vertical-offset="3132">
-          <caret line="547" column="27" selection-start-line="547" selection-start-column="27" selection-end-line="547" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="100">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#6756#8965#0" expanded="false" />
             <element signature="e#8968#19325#0" expanded="false" />
             <element signature="e#19348#22914#0" expanded="false" />
             <element signature="e#22918#26438#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mapping_ameer.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1144" max-vertical-offset="3150">
+          <caret line="356" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="619" selection-end-column="0" />
+          <folding>
+            <element signature="e#6756#8965#0" expanded="false" />
+            <element signature="e#8968#19325#0" expanded="false" />
+            <element signature="e#19348#22914#0" expanded="false" />
+            <element signature="e#22918#26438#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.76" vertical-offset="2430" max-vertical-offset="3312">
+          <caret line="143" column="3" selection-start-line="143" selection-start-column="3" selection-end-line="143" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ameers_fake_lane_lines.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.3657056" vertical-offset="619" max-vertical-offset="1278">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="e#136#156#0" expanded="true" />
           </folding>
         </state>
       </provider>

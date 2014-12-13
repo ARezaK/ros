@@ -147,6 +147,20 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+mapping/CMakeFiles/afl.dir/rule:
+	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mapping/CMakeFiles/afl.dir/rule
+.PHONY : mapping/CMakeFiles/afl.dir/rule
+
+# Convenience name for target.
+afl: mapping/CMakeFiles/afl.dir/rule
+.PHONY : afl
+
+# fast build rule for target.
+afl/fast:
+	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f mapping/CMakeFiles/afl.dir/build.make mapping/CMakeFiles/afl.dir/build
+.PHONY : afl/fast
+
+# Convenience name for target.
 mapping/CMakeFiles/mapping.dir/rule:
 	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 mapping/CMakeFiles/mapping.dir/rule
 .PHONY : mapping/CMakeFiles/mapping.dir/rule
@@ -159,6 +173,30 @@ mapping: mapping/CMakeFiles/mapping.dir/rule
 mapping/fast:
 	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f mapping/CMakeFiles/mapping.dir/build.make mapping/CMakeFiles/mapping.dir/build
 .PHONY : mapping/fast
+
+src/ameers_fake_lane_lines.o: src/ameers_fake_lane_lines.cpp.o
+.PHONY : src/ameers_fake_lane_lines.o
+
+# target to build an object file
+src/ameers_fake_lane_lines.cpp.o:
+	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f mapping/CMakeFiles/afl.dir/build.make mapping/CMakeFiles/afl.dir/src/ameers_fake_lane_lines.cpp.o
+.PHONY : src/ameers_fake_lane_lines.cpp.o
+
+src/ameers_fake_lane_lines.i: src/ameers_fake_lane_lines.cpp.i
+.PHONY : src/ameers_fake_lane_lines.i
+
+# target to preprocess a source file
+src/ameers_fake_lane_lines.cpp.i:
+	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f mapping/CMakeFiles/afl.dir/build.make mapping/CMakeFiles/afl.dir/src/ameers_fake_lane_lines.cpp.i
+.PHONY : src/ameers_fake_lane_lines.cpp.i
+
+src/ameers_fake_lane_lines.s: src/ameers_fake_lane_lines.cpp.s
+.PHONY : src/ameers_fake_lane_lines.s
+
+# target to generate assembly for a file
+src/ameers_fake_lane_lines.cpp.s:
+	cd /home/ameer/Desktop/catkin_ws/build && $(MAKE) -f mapping/CMakeFiles/afl.dir/build.make mapping/CMakeFiles/afl.dir/src/ameers_fake_lane_lines.cpp.s
+.PHONY : src/ameers_fake_lane_lines.cpp.s
 
 src/mapping_ameer.o: src/mapping_ameer.cpp.o
 .PHONY : src/mapping_ameer.o
@@ -190,6 +228,7 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... afl"
 	@echo "... edit_cache"
 	@echo "... install"
 	@echo "... install/local"
@@ -198,6 +237,9 @@ help:
 	@echo "... mapping"
 	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... src/ameers_fake_lane_lines.o"
+	@echo "... src/ameers_fake_lane_lines.i"
+	@echo "... src/ameers_fake_lane_lines.s"
 	@echo "... src/mapping_ameer.o"
 	@echo "... src/mapping_ameer.i"
 	@echo "... src/mapping_ameer.s"

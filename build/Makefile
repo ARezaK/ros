@@ -615,6 +615,19 @@ tf_generate_messages_py/fast:
 .PHONY : tf_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named afl
+
+# Build rule for target.
+afl: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 afl
+.PHONY : afl
+
+# fast build rule for target.
+afl/fast:
+	$(MAKE) -f mapping/CMakeFiles/afl.dir/build.make mapping/CMakeFiles/afl.dir/build
+.PHONY : afl/fast
+
+#=============================================================================
 # Target rules for targets named mapping
 
 # Build rule for target.
@@ -689,6 +702,7 @@ help:
 	@echo "... tf_generate_messages_cpp"
 	@echo "... tf_generate_messages_lisp"
 	@echo "... tf_generate_messages_py"
+	@echo "... afl"
 	@echo "... mapping"
 	@echo "... random_walk"
 .PHONY : help

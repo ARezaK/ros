@@ -4,6 +4,7 @@
 /home/ameer/Desktop/catkin_ws/build/stageroscam/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir
 /home/ameer/Desktop/catkin_ws/build/stageroscam/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir
 /home/ameer/Desktop/catkin_ws/build/stageroscam/CMakeFiles/actionlib_msgs_generate_messages_py.dir
+/home/ameer/Desktop/catkin_ws/build/mapping/CMakeFiles/afl.dir
 /home/ameer/Desktop/catkin_ws/build/CMakeFiles/clean_test_results.dir
 /home/ameer/Desktop/catkin_ws/build/CMakeFiles/doxygen.dir
 /home/ameer/Desktop/catkin_ws/build/stageroscam/CMakeFiles/geometry_msgs_generate_messages_cpp.dir

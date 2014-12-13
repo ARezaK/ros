@@ -34,17 +34,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mapping_ameer.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mapping_ameer.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mapping/src/mapping_ameer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6873449" vertical-offset="1901" max-vertical-offset="3564">
-              <caret line="548" column="26" selection-start-line="548" selection-start-column="26" selection-end-line="548" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2567" max-vertical-offset="3564">
+              <caret line="574" column="26" selection-start-line="0" selection-start-column="0" selection-end-line="619" selection-end-column="0" />
               <folding>
                 <element signature="e#6756#8965#0" expanded="false" />
                 <element signature="e#8968#19325#0" expanded="false" />
                 <element signature="e#19348#22914#0" expanded="false" />
                 <element signature="e#22918#26438#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ameers_fake_lane_lines.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/mapping/src/ameers_fake_lane_lines.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7791563" vertical-offset="7804" max-vertical-offset="9108">
+              <caret line="451" column="0" selection-start-line="451" selection-start-column="0" selection-end-line="451" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mapping/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2891" max-vertical-offset="3294">
+              <caret line="173" column="9" selection-start-line="173" selection-start-column="9" selection-end-line="173" selection-end-column="9" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -57,6 +77,8 @@
         <option value="$PROJECT_DIR$/src/mapping/src/mapping_leonardo.cpp" />
         <option value="$PROJECT_DIR$/src/mapping/src/mapping_ameer_cplus.cpp" />
         <option value="$PROJECT_DIR$/src/mapping/src/mapping_ameer.cpp" />
+        <option value="$PROJECT_DIR$/src/mapping/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/mapping/src/ameers_fake_lane_lines.cpp" />
       </list>
     </option>
   </component>
@@ -64,8 +86,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="113" />
-    <option name="y" value="52" />
+    <option name="x" value="262" />
+    <option name="y" value="50" />
     <option name="width" value="1123" />
     <option name="height" value="783" />
   </component>
@@ -195,7 +217,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="113" y="52" width="1123" height="783" extended-state="1" />
+    <frame x="262" y="50" width="1123" height="783" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -209,13 +231,13 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -264,6 +286,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mapping/src/mapping_leonardo.cpp">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="5130" max-vertical-offset="16308">
+          <caret line="285" column="41" selection-start-line="285" selection-start-column="41" selection-end-line="285" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mapping/src/mapping_ameer.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="100">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#6756#8965#0" expanded="false" />
+            <element signature="e#8968#19325#0" expanded="false" />
+            <element signature="e#19348#22914#0" expanded="false" />
+            <element signature="e#22918#26438#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mapping/src/mapping_leonardo.cpp">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4770" max-vertical-offset="16308">
           <caret line="265" column="23" selection-start-line="265" selection-start-column="16" selection-end-line="265" selection-end-column="23" />
           <folding />
@@ -280,14 +323,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mapping/src/mapping_ameer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6873449" vertical-offset="1901" max-vertical-offset="3564">
-          <caret line="548" column="26" selection-start-line="548" selection-start-column="26" selection-end-line="548" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2567" max-vertical-offset="3564">
+          <caret line="574" column="26" selection-start-line="0" selection-start-column="0" selection-end-line="619" selection-end-column="0" />
           <folding>
             <element signature="e#6756#8965#0" expanded="false" />
             <element signature="e#8968#19325#0" expanded="false" />
             <element signature="e#19348#22914#0" expanded="false" />
             <element signature="e#22918#26438#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mapping/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2891" max-vertical-offset="3294">
+          <caret line="173" column="9" selection-start-line="173" selection-start-column="9" selection-end-line="173" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mapping/src/ameers_fake_lane_lines.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7791563" vertical-offset="7804" max-vertical-offset="9108">
+          <caret line="451" column="0" selection-start-line="451" selection-start-column="0" selection-end-line="451" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

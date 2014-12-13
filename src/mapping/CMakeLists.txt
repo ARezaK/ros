@@ -113,6 +113,7 @@ include_directories(include
 
 
   add_executable(mapping src/mapping_ameer.cpp)
+  add_executable(afl src/ameers_fake_lane_lines.cpp)
  # add_executable(mapping src/mapping_leonardo.cpp)
 
 
@@ -126,6 +127,7 @@ include_directories(include
 #   ${catkin_LIBRARIES}
 # )
   target_link_libraries(mapping ${catkin_LIBRARIES})
+  target_link_libraries(afl ${catkin_LIBRARIES})
 
 #############
 ## Install ##

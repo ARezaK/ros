@@ -87,7 +87,7 @@ clean: CMakeFiles/clean_test_results.dir/clean
 CMakeFiles/doxygen.dir/all:
 	$(MAKE) -f CMakeFiles/doxygen.dir/build.make CMakeFiles/doxygen.dir/depend
 	$(MAKE) -f CMakeFiles/doxygen.dir/build.make CMakeFiles/doxygen.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ameer/Desktop/catkin_ws/build/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ameer/Desktop/catkin_ws/build/CMakeFiles  2
 	@echo "Built target doxygen"
 .PHONY : CMakeFiles/doxygen.dir/all
 
@@ -196,7 +196,7 @@ gtest/preinstall:
 gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ameer/Desktop/catkin_ws/build/CMakeFiles  2
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ameer/Desktop/catkin_ws/build/CMakeFiles  3
 	@echo "Built target gtest"
 .PHONY : gtest/CMakeFiles/gtest.dir/all
 
@@ -227,7 +227,7 @@ clean: gtest/CMakeFiles/gtest.dir/clean
 gtest/CMakeFiles/gtest_main.dir/all: gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ameer/Desktop/catkin_ws/build/CMakeFiles  3
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ameer/Desktop/catkin_ws/build/CMakeFiles  4
 	@echo "Built target gtest_main"
 .PHONY : gtest/CMakeFiles/gtest_main.dir/all
 
@@ -1229,10 +1229,12 @@ clean: stageroscam/CMakeFiles/tf_generate_messages_py.dir/clean
 # Directory level rules for directory mapping
 
 # Convenience name for "all" pass in the directory.
+mapping/all: mapping/CMakeFiles/afl.dir/all
 mapping/all: mapping/CMakeFiles/mapping.dir/all
 .PHONY : mapping/all
 
 # Convenience name for "clean" pass in the directory.
+mapping/clean: mapping/CMakeFiles/afl.dir/clean
 mapping/clean: mapping/CMakeFiles/mapping.dir/clean
 .PHONY : mapping/clean
 
@@ -1241,13 +1243,48 @@ mapping/preinstall:
 .PHONY : mapping/preinstall
 
 #=============================================================================
+# Target rules for target mapping/CMakeFiles/afl.dir
+
+# All Build rule for target.
+mapping/CMakeFiles/afl.dir/all:
+	$(MAKE) -f mapping/CMakeFiles/afl.dir/build.make mapping/CMakeFiles/afl.dir/depend
+	$(MAKE) -f mapping/CMakeFiles/afl.dir/build.make mapping/CMakeFiles/afl.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ameer/Desktop/catkin_ws/build/CMakeFiles  1
+	@echo "Built target afl"
+.PHONY : mapping/CMakeFiles/afl.dir/all
+
+# Include target in all.
+all: mapping/CMakeFiles/afl.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+mapping/CMakeFiles/afl.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ameer/Desktop/catkin_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 mapping/CMakeFiles/afl.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ameer/Desktop/catkin_ws/build/CMakeFiles 0
+.PHONY : mapping/CMakeFiles/afl.dir/rule
+
+# Convenience name for target.
+afl: mapping/CMakeFiles/afl.dir/rule
+.PHONY : afl
+
+# clean rule for target.
+mapping/CMakeFiles/afl.dir/clean:
+	$(MAKE) -f mapping/CMakeFiles/afl.dir/build.make mapping/CMakeFiles/afl.dir/clean
+.PHONY : mapping/CMakeFiles/afl.dir/clean
+
+# clean rule for target.
+clean: mapping/CMakeFiles/afl.dir/clean
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target mapping/CMakeFiles/mapping.dir
 
 # All Build rule for target.
 mapping/CMakeFiles/mapping.dir/all:
 	$(MAKE) -f mapping/CMakeFiles/mapping.dir/build.make mapping/CMakeFiles/mapping.dir/depend
 	$(MAKE) -f mapping/CMakeFiles/mapping.dir/build.make mapping/CMakeFiles/mapping.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ameer/Desktop/catkin_ws/build/CMakeFiles  4
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ameer/Desktop/catkin_ws/build/CMakeFiles  5
 	@echo "Built target mapping"
 .PHONY : mapping/CMakeFiles/mapping.dir/all
 
@@ -1297,7 +1334,7 @@ rand_walk_w_goal/preinstall:
 rand_walk_w_goal/CMakeFiles/random_walk.dir/all:
 	$(MAKE) -f rand_walk_w_goal/CMakeFiles/random_walk.dir/build.make rand_walk_w_goal/CMakeFiles/random_walk.dir/depend
 	$(MAKE) -f rand_walk_w_goal/CMakeFiles/random_walk.dir/build.make rand_walk_w_goal/CMakeFiles/random_walk.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ameer/Desktop/catkin_ws/build/CMakeFiles  5
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ameer/Desktop/catkin_ws/build/CMakeFiles  6
 	@echo "Built target random_walk"
 .PHONY : rand_walk_w_goal/CMakeFiles/random_walk.dir/all
 
