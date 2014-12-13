@@ -67,11 +67,8 @@ double drightx[40];                                     //last 40 cells classifi
 double drighty[40];                                     //last 40 cells classified as right (y coordinates
 double gylant, gxlant, gxrant, gyrant, angleftant=0, angrightant=0, firstangleleft=0, firstangleright=0;
 float res=0.020;		                                //Resolution of lane line images meters/px
-unsigned int seq=0;		                //sequence for lanelines goal (not used)
-unsigned int seq2=0;		            //sequence for gps tail (not used)
 unsigned int firstL=0, firstR=0;                        // flags to know if first regions Left and right are already classified/identified
 nav_msgs::OccupancyGrid full_map;                           // General Map ...this is "THA MAP"! (includes all the features: obstacles, lane lines, positions...)
-nav_msgs::OccupancyGrid obsta_map;                          //Obstacles map ...TRESHOLDED
 nav_msgs::OccupancyGrid unkown_ll;                          //Lane lines map linelanes
 nav_msgs::OccupancyGrid l_lane_map;                          //Map of left lanes
 nav_msgs::OccupancyGrid r_lane_map;                          //Map of right lanes
@@ -201,7 +198,7 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
                         //if mapregions map data is < -5 or prob_left_map >prob_right_map and prob_map_left < 20
                         l_lane_map.data[MAP_IDX(l_lane_map.info.width, mapxllind, mapyllind)]=100; //left
                         full_map.data[MAP_IDX(full_map.info.width, mapxllind, mapyllind)]=30;
-                        for (unsigned int i=0; i<9; i++) { //this 9 should be probably 39. This is setting the seed
+                        for (unsigned int i=0; i<9; i++) { //this 9 and the ones below should be probably 39. This is setting the seed
                             dleftx[i]=dleftx[i+1];
                         }
                         dleftx[39]=gxll-gxlant;
@@ -212,7 +209,7 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
                         for (unsigned int i =0; i<9 ; i++) {
                             for (unsigned int j =0; j < 9; j++) {
                                 if ((mapxllind+i-4)<full_map.info.width && (mapyllind+j-4)<full_map.info.height && (mapxllind+i-4)>0 && (mapyllind+j-4)>0) {
-                                    map_region.data[MAP_IDX(map_region.info.width, mapxllind+i-4, mapyllind+j-4)]=-10;
+                                    map_region.data[MAP_IDX(map_region.info.width, mapxllind+i-4, mapyllind+j-4)]=-10; //mapregion is set to -10 for left
                                 }
                             }
                         }
@@ -278,8 +275,9 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
                 }
             }  //end of boundaries check
         } //end of first for
-        seq++;
     } //end of second for
+
+    //I belive everything below this is for ray tracing
     for (unsigned int i = 0; i< (full_map.info.width*full_map.info.height); i++) {
         if (full_map.data[i]==22)
             full_map.data[i]=0;
