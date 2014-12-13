@@ -63,13 +63,11 @@
       <file leaf-file-name="mapping_ameer.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mapping_ameer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.1471927" vertical-offset="979" max-vertical-offset="2664">
-              <caret line="583" column="42" selection-start-line="583" selection-start-column="42" selection-end-line="583" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.41122913" vertical-offset="2105" max-vertical-offset="7758">
+              <caret line="222" column="31" selection-start-line="222" selection-start-column="31" selection-end-line="222" selection-end-column="31" />
               <folding>
                 <element signature="e#6718#8927#0" expanded="false" />
-                <element signature="e#8930#19287#0" expanded="false" />
-                <element signature="e#19310#22876#0" expanded="false" />
-                <element signature="e#22880#26400#0" expanded="false" />
+                <element signature="e#23658#27178#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -110,9 +108,9 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="262" />
+    <option name="x" value="134" />
     <option name="y" value="50" />
-    <option name="width" value="1123" />
+    <option name="width" value="1251" />
     <option name="height" value="783" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -396,7 +394,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="262" y="50" width="1123" height="783" extended-state="0" />
+    <frame x="134" y="50" width="1251" height="783" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -404,7 +402,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32944608" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24977699" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22417934" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -438,7 +436,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -449,9 +447,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#6718#8927#0" expanded="false" />
-            <element signature="e#8930#19287#0" expanded="false" />
-            <element signature="e#19310#22876#0" expanded="false" />
-            <element signature="e#22880#26400#0" expanded="false" />
+            <element signature="e#23658#27178#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -474,13 +470,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mapping_ameer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.1471927" vertical-offset="979" max-vertical-offset="2664">
-          <caret line="583" column="42" selection-start-line="583" selection-start-column="42" selection-end-line="583" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.41122913" vertical-offset="2105" max-vertical-offset="7758">
+          <caret line="222" column="31" selection-start-line="222" selection-start-column="31" selection-end-line="222" selection-end-column="31" />
           <folding>
             <element signature="e#6718#8927#0" expanded="false" />
-            <element signature="e#8930#19287#0" expanded="false" />
-            <element signature="e#19310#22876#0" expanded="false" />
-            <element signature="e#22880#26400#0" expanded="false" />
+            <element signature="e#23658#27178#0" expanded="false" />
           </folding>
         </state>
       </provider>

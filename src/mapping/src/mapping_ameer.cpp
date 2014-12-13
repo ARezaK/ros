@@ -171,32 +171,37 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
     //uint32 step		Full row length in bytes
     //uint8[] data		actual matrix data, size is (step * rows)
 
-    double lx, ly,gyll,gxll,a,b, glob_xleft, glob_yleft;
+    double lx, ly,gyll,gxll,msg_step,msg_height, glob_xleft, glob_yleft;
     double glob_xright, glob_yright, beta, sumldx=0, sumldy=0, sumrdx=0;
     double sumrdy=0, avgly=0, avglx=0, avgry=0, avgrx=0, angleft, angright, probaline;
-    a=msg->step;
-    b=msg->height;
+    msg_step=msg->step;
+    msg_height=msg->height;
     unsigned int mapxllind, mapyllind, mapxlind, mapylind, mapxrind, mapyrind;
-    for (unsigned int y =b-1; y > 0; y--) {
-        for (unsigned int x = 0; x < a; x++) {
-            lx=(b-y)*res;	//distance from robot x
-            ly=res*(((a-1)/2)-x);	//distance from robot y
+    for (unsigned int y =msg_height-1; y > 0; y--) {//row
+        for (unsigned int x = 0; x < msg_step; x++) { //column
+            lx=(msg_height-y)*res;	//distance from robot x
+            ly=res*(((msg_step-1)/2)-x);	//distance from robot y
             gxll=(lx*cos(headingant[0]))-(ly*sin(headingant[0]))+robotxant[0]; //dist x from global
             gyll=(lx*sin(headingant[0]))+(ly*cos(headingant[0]))+robotyant[0]; //dist y from global
-            mapxllind=floor(gxll/full_map.info.resolution);
+            mapxllind=floor(gxll/full_map.info.resolution); //global indexes
             mapyllind=floor(gyll/full_map.info.resolution);
             if ((robotyant[0]!=0) && (robotxant[0]!=0) && mapxllind<full_map.info.width && mapyllind<full_map.info.height && (mapxllind>0) && (mapyllind>0)){
-                if (msg->data[MAP_IDX(a, x, y)]==1 && (unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]<100)) {
+                if (msg->data[MAP_IDX(msg_step, x, y)]==1 && (unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]<100)) {
+                    //if img pixel is 1 and unknown lane line map position is < 100; increment cell by 25
                     unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]+=25;	//unknown lane line map
                 }
-                else if (msg->data[MAP_IDX(a, x, y)]==0 && (unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]<30 && unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]>-120)  ) {
-                    unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]-=1;
+                else if (msg->data[MAP_IDX(msg_step, x, y)]==0 && (unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]<30 && unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]>-120)  ) {
+                    //else if img pixel = 0 and unkown lane line map data position is between -120 and 30
+                    unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]-=1; //decrease by 1
                 }
-                if (msg->data[MAP_IDX(a, x, y)]==1 && unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]>=55 && (l_lane_map.data[MAP_IDX(l_lane_map.info.width, mapxllind, mapyllind)]!=100) && (r_lane_map.data[MAP_IDX(r_lane_map.info.width, mapxllind, mapyllind)]!=100)) {
+                if (msg->data[MAP_IDX(msg_step, x, y)]==1 && unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]>=55 && (l_lane_map.data[MAP_IDX(l_lane_map.info.width, mapxllind, mapyllind)]!=100) && (r_lane_map.data[MAP_IDX(r_lane_map.info.width, mapxllind, mapyllind)]!=100)) {
+                    //if img pixel is 1 and unkown lane line map data is > 55 and left & right lane map data position is not 100
+                    //I believe the following two if statements determine if its a left lane or right lane and extend the seed forward
                     if (map_region.data[MAP_IDX(map_region.info.width, mapxllind, mapyllind)]<-5 || ( (map_prob_left[MAP_IDX(full_map.info.width, mapxllind, mapyllind)]>map_prob_right[MAP_IDX(full_map.info.width, mapxllind, mapyllind)]) && map_prob_left[MAP_IDX(full_map.info.width, mapxllind, mapyllind)]>20)) {
+                        //if mapregions map data is < -5 or prob_left_map >prob_right_map and prob_map_left < 20
                         l_lane_map.data[MAP_IDX(l_lane_map.info.width, mapxllind, mapyllind)]=100; //left
                         full_map.data[MAP_IDX(full_map.info.width, mapxllind, mapyllind)]=30;
-                        for (unsigned int i=0; i<9; i++) {
+                        for (unsigned int i=0; i<9; i++) { //this 9 should be probably 39. This is setting the seed
                             dleftx[i]=dleftx[i+1];
                         }
                         dleftx[39]=gxll-gxlant;
