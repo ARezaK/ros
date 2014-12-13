@@ -90,7 +90,6 @@ geometry_msgs::Point32 rightlane;                   //not used
 geometry_msgs::Point32 gpstail;                     //not used
 bool setup=true;
 
-sensor_msgs::Image image_used_for_ll;
 //***************************************End of global variables**************************************************************************************
 
 void convertLocalMaptoLidar(int ix, int iy, int grid_x, int grid_y, int id){
@@ -534,27 +533,6 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
 }
 
 
-void convertcameraimage(const sensor_msgs::Image::ConstPtr& msg){
-    ROS_INFO_STREAM("GOT IMAGE");
-    image_used_for_ll.header = msg->header;
-    image_used_for_ll.height = msg->height;
-    image_used_for_ll.width = msg->width;
-    image_used_for_ll.encoding = msg->encoding;
-    image_used_for_ll.is_bigendian = msg->is_bigendian;
-    image_used_for_ll.step = msg->step;
-    image_used_for_ll.data = msg->data;
-    int i = 0;
-    int size = msg->step*msg->height;
-    for(i=0;i<size-1;i++){
-        if(msg->data[i]==0){
-            image_used_for_ll.data[i]=255;
-        }
-        else{
-            image_used_for_ll.data[i]=0;
-        }
-    }
-
-}
 	
 int main(int argc, char **argv) {
     ros::init(argc, argv, "the_mapping");
@@ -596,9 +574,6 @@ int main(int argc, char **argv) {
     //ros::Publisher localmap2Pub = n.advertise<sensor_msgs::LaserScan>("localmap2", 1); //Local2 map (flags)
     */
 
-    ros::Subscriber imageSub = n.subscribe("image",1,convertcameraimage);
-    ros::Publisher imagePub = n.advertise<sensor_msgs::Image>("convertimage", 1); //Local1 map (lanelines)
-
     ros::Rate rate(45);
 
     while(ros::ok()) {
@@ -608,8 +583,6 @@ int main(int argc, char **argv) {
         localmap1Pub.publish(localmap1);*/
         //localmap1Pub.publish(localmap1);
         //localmap2Pub.publish(localmap2);
-
-        imagePub.publish(image_used_for_ll);
 
         //ROS_INFO_STREAM("ros is ok");
 
