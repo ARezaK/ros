@@ -55,9 +55,9 @@ using namespace cv;
 
 //*****************************************VARIABLES USED***********************************************************************************
 double pose_xinit, pose_yinit, pose_ainit;              //intitial position of the robot values in UTM //(used in alternate pose callback)
-//float robotx=0, roboty=0, heading=0, pitch=0, roll=0;  //robotx and roboty are the current position of the robot in meters in global coordinates
-double map_prob_left[1000000];                          //a map storing all the probabilities of a lane line to be part of the left line
-double map_prob_right[1000000];                         //a map storing all the probabilities of a lane line to be part of the right linelanes
+float robotx=0, roboty=0, heading=0, pitch=0, roll=0;  //robotx and roboty are the current position of the robot in meters in global coordinates
+double map_prob_left[19219456];                          //a map storing all the probabilities of a lane line to be part of the left line
+double map_prob_right[19219456];                         //a map storing all the probabilities of a lane line to be part of the right linelanes
 double robotxant [2];                                   //a vector storing the last 2 positions of the robot (x coordinates)
 double robotyant [2];                                   //a vector storing the last 2 positions of the robot (y coordinates)
 double headingant [2];                                  //a vector storing the last 2 positions of the robot (heding in degrees)
@@ -68,6 +68,7 @@ double drighty[40];                                     //last 40 cells classifi
 double gylant, gxlant, gxrant, gyrant, angleftant=0, angrightant=0, firstangleleft=0, firstangleright=0;
 float res=0.020;		                                //Resolution of lane line images meters/px
 unsigned int firstL=0, firstR=0;                        // flags to know if first regions Left and right are already classified/identified
+//double robotx=0, roboty=0, heading=0, pitch=0,roll=0;
 nav_msgs::OccupancyGrid full_map;                           // General Map ...this is "THA MAP"! (includes all the features: obstacles, lane lines, positions...)
 nav_msgs::OccupancyGrid unkown_ll;                          //Lane lines map linelanes
 nav_msgs::OccupancyGrid l_lane_map;                          //Map of left lanes
@@ -167,12 +168,14 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
     //uint8 is_bigendian
     //uint32 step		Full row length in bytes
     //uint8[] data		actual matrix data, size is (step * rows)
+    ROS_INFO_STREAM("HIT LANE CALLBACK");
 
     double lx, ly,gyll,gxll,msg_step,msg_height, glob_xleft, glob_yleft;
     double glob_xright, glob_yright, beta, sumldx=0, sumldy=0, sumrdx=0;
     double sumrdy=0, avgly=0, avglx=0, avgry=0, avgrx=0, angleft, angright, probaline;
     msg_step=msg->step;
     msg_height=msg->height;
+
     unsigned int mapxllind, mapyllind, mapxlind, mapylind, mapxrind, mapyrind;
     for (unsigned int y =msg_height-1; y > 0; y--) {//row
         for (unsigned int x = 0; x < msg_step; x++) { //column
@@ -182,6 +185,12 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
             gyll=(lx*sin(headingant[0]))+(ly*cos(headingant[0]))+robotyant[0]; //dist y from global
             mapxllind=floor(gxll/full_map.info.resolution); //global indexes
             mapyllind=floor(gyll/full_map.info.resolution);
+
+            /*ROS_INFO_STREAM("SHIT");
+            ROS_INFO_STREAM(robotxant[0]);
+            ROS_INFO_STREAM(robotyant[0]);
+            ROS_INFO_STREAM(mapxllind);
+            ROS_INFO_STREAM(mapyllind);*/
             if ((robotyant[0]!=0) && (robotxant[0]!=0) && mapxllind<full_map.info.width && mapyllind<full_map.info.height && (mapxllind>0) && (mapyllind>0)){
                 if (msg->data[MAP_IDX(msg_step, x, y)]==1 && (unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]<100)) {
                     //if img pixel is 1 and unknown lane line map position is < 100; increment cell by 25
@@ -196,11 +205,13 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
                     //I believe the following two if statements determine if its a left lane or right lane and extend the seed forward
                     if (map_region.data[MAP_IDX(map_region.info.width, mapxllind, mapyllind)]<-5 || ( (map_prob_left[MAP_IDX(full_map.info.width, mapxllind, mapyllind)]>map_prob_right[MAP_IDX(full_map.info.width, mapxllind, mapyllind)]) && map_prob_left[MAP_IDX(full_map.info.width, mapxllind, mapyllind)]>20)) {
                         //if mapregions map data is < -5 or prob_left_map >prob_right_map and prob_map_left < 20
+
                         l_lane_map.data[MAP_IDX(l_lane_map.info.width, mapxllind, mapyllind)]=100; //left
                         full_map.data[MAP_IDX(full_map.info.width, mapxllind, mapyllind)]=30;
-                        for (unsigned int i=0; i<9; i++) { //this 9 and the ones below should be probably 39. This is setting the seed
+                        for (unsigned int i=0; i<39; i++) { //this 9 and the ones below should be probably 39. This is setting the seed
                             dleftx[i]=dleftx[i+1];
                         }
+
                         dleftx[39]=gxll-gxlant;
                         dlefty[39]=gyll-gylant;
                         gxlant=gxll;
@@ -213,7 +224,9 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
                                 }
                             }
                         }
+
                     }
+
                     if (map_region.data[MAP_IDX(map_region.info.width, mapxllind, mapyllind)]>5) {
                         r_lane_map.data[MAP_IDX(r_lane_map.info.width, mapxllind, mapyllind)]=100; //right
                         full_map.data[MAP_IDX(full_map.info.width, mapxllind, mapyllind)]=60;
@@ -273,16 +286,12 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
                     }
                     unkown_ll.data[MAP_IDX(unkown_ll.info.width, mapxllind, mapyllind)]=120;	//mapa 3 unknown lane
                 }
-            }  //end of boundaries check
+            }  //end of boundaries check)
         } //end of first for
     } //end of second for
 
     //I belive everything below this is for ray tracing
-    /*commented out the for loop below b/c it doesnt make sense and i think he used it for testing
-    for (unsigned int i = 0; i< (full_map.info.width*full_map.info.height); i++) {
-        if (full_map.data[i]==22)
-            full_map.data[i]=0;
-    }*/
+    /*
     for (unsigned int i=0; i<40 ; i++) {
         sumldx=sumldx+ dleftx[i];
         sumldy=sumldy+ dlefty[i];
@@ -308,8 +317,6 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
                 mapylind=floor(glob_yleft/full_map.info.resolution);
 
                 if ( glob_yleft>0 && glob_xleft>0 && glob_xleft<full_map.info.width*full_map.info.resolution && glob_yleft<full_map.info.height*full_map.info.resolution ) {
-
-                    //TODO poner la funcion que hace ambas gausianas e incrementar
                     probaline=(exp(-(pow((predleft/8),2))))*(exp(-(pow((anguleitor/10),2))));
                     map_prob_left[MAP_IDX(full_map.info.width, mapxlind, mapylind)]+=probaline;
                     pred_l.data[MAP_IDX(pred_l.info.width, mapxlind, mapylind)]+=1;
@@ -355,6 +362,7 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
             drighty[i]=drighty[34];
         }
     }
+    */
 } // end of callback
 
 
@@ -382,10 +390,6 @@ void retrieveMapCallback(const nav_msgs::OccupancyGrid::ConstPtr& msg){
             localmap_occup1.data[i]=0;
         }
 
-	/*
-        //MAP 2 (OBSTACLE Thresholded map)
-        obsta_map.info = msg->info;
-        obsta_map.data.resize(obsta_map.info.width * obsta_map.info.height);
         //MAP 3 (UNKNOWN Lane lines map)
         unkown_ll.info = msg->info;
         unkown_ll.data.resize(unkown_ll.info.width * unkown_ll.info.height);
@@ -399,9 +403,7 @@ void retrieveMapCallback(const nav_msgs::OccupancyGrid::ConstPtr& msg){
         //MAP 5 (Right Lane lines map)
         r_lane_map.info = msg->info;
         r_lane_map.data.resize(r_lane_map.info.width * r_lane_map.info.height);
-        //MAP 6 (POSITIONS)
-        posit_map.info = msg->info;
-        posit_map.data.resize(posit_map.info.width * posit_map.info.height);
+
         //MAP 7 (Predicted left)
         pred_l.info = msg->info;
         pred_l.data.resize(pred_l.info.width * pred_l.info.height);
@@ -409,21 +411,19 @@ void retrieveMapCallback(const nav_msgs::OccupancyGrid::ConstPtr& msg){
         pred_r.info =msg->info;
         pred_r.data.resize(pred_r.info.width * pred_r.info.height);
 
-
-        //******INITIALIZE MAPS
         for (unsigned int i = 0; i< (full_map.info.width*full_map.info.height); i++) {
-            obsta_map.data[i]=50;
             unkown_ll.data[i]=0;
             l_lane_map.data[i]=0;
             r_lane_map.data[i]=0;
-            posit_map.data[i]=0;
             pred_l.data[i]=0;
             pred_r.data[i]=0;
             map_region.data[i]=0;
+
             map_prob_left[i]=0;
-            map_prob_right[i]=0;
-	   
+            map_prob_right[i]=0; //map prob right or left is sitting directly next to fullmap and overwriting it
         }
+
+
         //******INITIALIZE lanelines deltas
         for (unsigned int i = 0; i< 10; i++) {
             dleftx[i]=0;
@@ -431,13 +431,16 @@ void retrieveMapCallback(const nav_msgs::OccupancyGrid::ConstPtr& msg){
             drightx[i]=0;
             drighty[i]=0;
         }
-        //*******Initialize last 15 poses*******
+        //*******Initialize last 2 poses*******
         for (unsigned int i= 0; i< 2; i++) {
             robotxant[i]=0;
             robotyant[i]=0;
             headingant[i]=0;
         }
-	*/
+
+
+        //******INITIALIZE MAPS
+
         for (unsigned int lmi=0; lmi < 1081; lmi++) {
             localmap1.ranges[lmi]=0;
             localmap2.ranges[lmi]=0;
@@ -463,6 +466,28 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
     Given the robot's pose in the map frame, if you want the corresponding index into the occupancy grid map, you'd do something like below
      */
     //testing stuff out
+    btQuaternion q = btQuaternion(msg->pose.pose.orientation.x, \
+    			msg->pose.pose.orientation.y, msg->pose.pose.orientation.z, \
+    			msg->pose.pose.orientation.w);
+    btMatrix3x3(q).getEulerYPR(heading, pitch, roll);
+
+
+
+    for (unsigned int i= 0; i< 1; i++) {
+        robotxant[i]=robotxant[i+1];
+        robotyant[i]=robotyant[i+1];
+        headingant[i]=headingant[i+1];
+    }
+
+    robotxant[1]=robotx;
+    robotyant[1]=roboty;
+    headingant[1]=heading;
+
+    robotx = msg->pose.pose.position.x;
+    roboty = msg->pose.pose.position.y;
+    ROS_INFO_STREAM(robotx);
+    ROS_INFO_STREAM(robotxant[0]);
+
     //end testing
 	
     int iy2, ix2;
@@ -479,25 +504,28 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
     }
 
     double map_x = transform.getOrigin().x(); //Get the transformed coordinates
+
     double map_y = transform.getOrigin().y();
     double map_z = transform.getOrigin().z();
-    ROS_INFO_STREAM("map_X" << transform.getOrigin().x());
-    ROS_INFO_STREAM("map_Y" << transform.getOrigin().y());
+    //ROS_INFO_STREAM("map_X" << transform.getOrigin().x());
+    //ROS_INFO_STREAM("map_Y" << transform.getOrigin().y());
 
     int grid_x;
     int grid_y;
 	
-	ROS_INFO_STREAM(full_map.info.origin.position.x);
-	ROS_INFO_STREAM("RES: " << full_map.info.resolution);
 
     grid_x = (unsigned int)((map_x - full_map.info.origin.position.x) / full_map.info.resolution);
     grid_y = (unsigned int)((map_y - full_map.info.origin.position.y) / full_map.info.resolution);
 
-    ROS_INFO_STREAM("gridx " << grid_x);
-    ROS_INFO_STREAM("gridy " << grid_y);
+    robotx = map_x;
+    roboty = map_y;
+
+    //ROS_INFO_STREAM("gridx " << grid_x);
+    //ROS_INFO_STREAM("gridy " << grid_y);
     localmap_occup1.info.origin.position.x=map_x-25*full_map.info.resolution; //Set our position as center of the local map
     localmap_occup1.info.origin.position.y=map_y-25*full_map.info.resolution;
     localmap_occup1.info.origin.position.z=map_z;
+
 
 
     ix2=(grid_x-25);	//in map coordinates
@@ -510,23 +538,21 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
         localmap2.intensities[lmi]=0.5;
     }
 
-    ROS_INFO_STREAM("ix2 " << ix2);
-    ROS_INFO_STREAM("iy2 " << iy2);
+
+    //ROS_INFO_STREAM("ix2 " << ix2);
+    //ROS_INFO_STREAM("iy2 " << iy2);
 
     int i = 0;
 
     for (int iy=iy2; iy<(iy2+50); iy++) {
         for (int ix=ix2; ix<(ix2+50); ix++) {
-		
             localmap_occup1.data[i] = full_map.data[MAP_IDX(full_map.info.width, ix, iy)];
-	    
+
             if(full_map.data[MAP_IDX(full_map.info.width, ix, iy)]==100) {	//check if there is an obstacle there
                 convertLocalMaptoLidar(ix, iy, grid_x, grid_y, 100);
             }
             //Need to add in the other possiblites here like left, right lane, etc once image processing is done
             //as well as the goal
-
-
 
 	        ros::Time scan_time = ros::Time::now();
             localmap1.header.stamp = scan_time; //used for publishing local map
@@ -536,6 +562,7 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
             i++;
         }
     }
+
 
 }
 
@@ -567,31 +594,44 @@ int main(int argc, char **argv) {
     localmap2.ranges.resize(1081);
     localmap2.intensities.resize(1081);
 
-    //image
-
 
     //SUBSCRIBE/PUBLISH TO:
     /*
-    ros::Subscriber poseSub = n.subscribe("base_pose_ground_truth", 1, 	extractLocalMap);	//change this so it subscribes to the tf
-    ros::Subscriber mapSub = n.subscribe("map", 1, retrieveMapCallback); //Subscribe to gmapping map
-    ros::Publisher mappingPub = n.advertise<nav_msgs::OccupancyGrid>("full_map", 1);	//Publish the Full map
+
+        ros::Publisher localmappingPub = n.advertise<nav_msgs::OccupancyGrid>("localmap_occup1", 1);	//Publish the local map
+
+
     ros::Publisher localmappingPub = n.advertise<nav_msgs::OccupancyGrid>("localmap_occup1", 1);	//Publish the local map
 
     ros::Publisher localmap1Pub = n.advertise<sensor_msgs::LaserScan>("localmap1", 1); //Local1 map (lanelines)
     //ros::Publisher localmap2Pub = n.advertise<sensor_msgs::LaserScan>("localmap2", 1); //Local2 map (flags)
     */
+    ros::Publisher mappingPub = n.advertise<nav_msgs::OccupancyGrid>("full_map", 1);	//Publish the Full map
+    ros::Subscriber mapSub = n.subscribe("map", 1, retrieveMapCallback); //Subscribe to gmapping map
+    ros::Subscriber laneSub = n.subscribe("convertimage", 1, laneCallback);
+    ros::Subscriber poseSub = n.subscribe("base_pose_ground_truth", 1, 	extractLocalMap);	//change this so it subscribes to the tf
+    ros::Publisher llanemap = n.advertise<nav_msgs::OccupancyGrid>("llanemap", 1);	//Publish the Full map
+    ros::Publisher rlanemap = n.advertise<nav_msgs::OccupancyGrid>("rlanemap", 1);	//Publish the local map
+    ros::Publisher unknownamp = n.advertise<nav_msgs::OccupancyGrid>("unknownllmap", 1);	//Publish the Full map
+    ros::Publisher mapregion = n.advertise<nav_msgs::OccupancyGrid>("mapregion", 1);	//Publish the local map
 
     ros::Rate rate(45);
 
     while(ros::ok()) {
-        /*
+
         mappingPub.publish(full_map);
+
+        /*
         localmappingPub.publish(localmap_occup1);
         localmap1Pub.publish(localmap1);*/
         //localmap1Pub.publish(localmap1);
         //localmap2Pub.publish(localmap2);
 
-        //ROS_INFO_STREAM("ros is ok");
+
+        llanemap.publish(l_lane_map);
+        rlanemap.publish(r_lane_map);
+        unknownamp.publish(unkown_ll);
+        mapregion.publish(map_region);
 
         ros::spinOnce();
         rate.sleep();

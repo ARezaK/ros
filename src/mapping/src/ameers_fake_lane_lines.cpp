@@ -40,6 +40,16 @@ void convertcameraimage(const sensor_msgs::Image::ConstPtr& msg){
         }
     }
 
+    for(i=0;i<size-1;i++){
+        if(image_used_for_ll.data[i]==255){
+            image_used_for_ll.data[i]=1;
+        }
+        else{
+            image_used_for_ll.data[i]=0;
+        }
+    }
+
+
 }
 
 int main(int argc, char **argv) {
