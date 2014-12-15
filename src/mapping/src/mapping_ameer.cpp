@@ -176,10 +176,14 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
     msg_height=msg->height;
 
     unsigned int mapxllind, mapyllind, mapxlind, mapylind, mapxrind, mapyrind;
-    for (unsigned int y =msg_height-1; y > 0; y--) {//row
-        for (unsigned int x = 0; x < msg_step; x++) { //column
+    for (unsigned int y =0; y <msg_height-1; y++) {//row //right to left
+        for (unsigned int x = 0; x < msg_step; x++) { //column //bottom to top
             lx=(msg_height-y)*res;	//distance from robot x
             ly=res*(((msg_step-1)/2)-x);	//distance from robot y
+            //x<msg_step/2? -res*x :
+            //y should check from -1/2 step to +1/2 step
+            //why is ly based off of x?
+            //why is lx based off of message height and y?
             gxll=(lx*cos(headingant[0]))-(ly*sin(headingant[0]))+robotxant[0]; //dist x from global
             gyll=(lx*sin(headingant[0]))+(ly*cos(headingant[0]))+robotyant[0]; //dist y from global
             mapxllind=floor(gxll/full_map.info.resolution); //global indexes
