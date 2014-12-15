@@ -168,7 +168,6 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
     //uint8 is_bigendian
     //uint32 step		Full row length in bytes
     //uint8[] data		actual matrix data, size is (step * rows)
-    ROS_INFO_STREAM("HIT LANE CALLBACK");
 
     double lx, ly,gyll,gxll,msg_step,msg_height, glob_xleft, glob_yleft;
     double glob_xright, glob_yright, beta, sumldx=0, sumldy=0, sumrdx=0;
@@ -291,7 +290,7 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
     } //end of second for
 
     //I belive everything below this is for ray tracing
-    /*
+
     for (unsigned int i=0; i<40 ; i++) {
         sumldx=sumldx+ dleftx[i];
         sumldy=sumldy+ dlefty[i];
@@ -325,8 +324,7 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
             }
         }
 
-        ROS_INFO_STREAM("left: " << angleft);
-        ROS_INFO_STREAM("leftant: " << angleftant);
+
         angleftant=angleft;
         firstangleleft=1;
     }
@@ -351,8 +349,7 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
                 pred_r.data[MAP_IDX(pred_r.info.width, mapxlind, mapylind)]=100;
             }
         }
-        ROS_INFO_STREAM("right: " << angright);
-        ROS_INFO_STREAM("rightant: " << angrightant);
+
         angrightant=angright;
         firstangleright=1;
     }
@@ -362,7 +359,7 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
             drighty[i]=drighty[34];
         }
     }
-    */
+
 } // end of callback
 
 
@@ -504,7 +501,6 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
     }
 
     double map_x = transform.getOrigin().x(); //Get the transformed coordinates
-
     double map_y = transform.getOrigin().y();
     double map_z = transform.getOrigin().z();
     //ROS_INFO_STREAM("map_X" << transform.getOrigin().x());
@@ -517,8 +513,8 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
     grid_x = (unsigned int)((map_x - full_map.info.origin.position.x) / full_map.info.resolution);
     grid_y = (unsigned int)((map_y - full_map.info.origin.position.y) / full_map.info.resolution);
 
-    robotx = map_x;
-    roboty = map_y;
+    robotx = map_x - full_map.info.origin.position.x;
+    roboty = map_y - full_map.info.origin.position.x;
 
     //ROS_INFO_STREAM("gridx " << grid_x);
     //ROS_INFO_STREAM("gridy " << grid_y);
