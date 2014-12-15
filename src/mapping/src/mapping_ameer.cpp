@@ -186,6 +186,7 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
             //why is lx based off of message height and y?
             gxll=(lx*cos(headingant[0]))-(ly*sin(headingant[0]))+robotxant[0]; //dist x from global
             gyll=(lx*sin(headingant[0]))+(ly*cos(headingant[0]))+robotyant[0]; //dist y from global
+            //wierd result when switchign cos and sins and + and - 
             mapxllind=floor(gxll/full_map.info.resolution); //global indexes
             mapyllind=floor(gyll/full_map.info.resolution);
 
