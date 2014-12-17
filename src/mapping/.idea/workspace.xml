@@ -63,8 +63,8 @@
       <file leaf-file-name="mapping_ameer.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mapping_ameer.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7677419" vertical-offset="11008" max-vertical-offset="11628">
-              <caret line="657" column="5" selection-start-line="657" selection-start-column="5" selection-end-line="657" selection-end-column="5" />
+            <state vertical-scroll-proportion="1.7548387" vertical-offset="280" max-vertical-offset="11592">
+              <caret line="95" column="63" selection-start-line="95" selection-start-column="63" selection-end-line="95" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -509,8 +509,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mapping_ameer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7677419" vertical-offset="11008" max-vertical-offset="11628">
-          <caret line="657" column="5" selection-start-line="657" selection-start-column="5" selection-end-line="657" selection-end-column="5" />
+        <state vertical-scroll-proportion="1.7548387" vertical-offset="280" max-vertical-offset="11592">
+          <caret line="95" column="63" selection-start-line="95" selection-start-column="63" selection-end-line="95" selection-end-column="63" />
           <folding />
         </state>
       </provider>

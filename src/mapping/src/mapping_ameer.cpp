@@ -43,7 +43,7 @@ using namespace std;                        //Don't remember exactly why I inclu
 // 85 = Position
 // 100 = Obstacle
 
-//Notes and precaustions:
+//Notes and precautions:
 /*
 1) Code depends on the robot having positive x and y coordinates on the map to make the math easier. Will possibly run with negative
    coordinates but program may act up or seg fault. (Latter is much more probable). You'll know your running in negative coords if the
@@ -122,7 +122,7 @@ void convertLocalMaptoLidar(int ix, int iy, int grid_x, int grid_y, int id){
      45 = unknown lane line
      25 = red flag
      75 = blue flag
-     100 = obstacle this one is only used for testing stuff
+     100 = obstacle
      */
 
     float dx=0;
@@ -135,9 +135,9 @@ void convertLocalMaptoLidar(int ix, int iy, int grid_x, int grid_y, int id){
     dy=(iy-grid_y)*full_map.info.resolution;
     dt=sqrt((dx*dx)+(dy*dy)); //hypotenuse corresponding to the length
     ang=(atan2(dy,dx));
-    if(id==100){ //only for testing
+    if(id==100){
         index=floor((ang-localmap1.angle_min)/localmap1.angle_increment);
-        if(index<5000000){ //If this object is not within the boundaries set by angle_min and angle_max index will overflow so we check to
+        if(index<5000000){ //If this object is not within the boundaries set by angle_min and angle_max, index will overflow so we check to
             //Make sure that index is actually below a very large number to verify it is within the boundaries.
             localmap1.ranges[index]=dt;
             localmap1.intensities[index]=0;		//left lane
@@ -195,9 +195,9 @@ void laneCallback(const sensor_msgs::Image::ConstPtr& msg) {
     //uint8[] data		actual matrix data, size is (step * rows)
  
     /* Awful function that should be scrapped. Has been slightly improved so that it is now
-       partly unminifed and run. Used to generate lane lines. Have not bothered to try to fix the right lane lines 
+       partly unminifed and can run. Used to generate lane lines. Haven't had a chance to try to fix the right lane lines
        since left lane lines dont work yet. Once the modifications to left lanes are fixed then a simple probablity
-       check is needed to be added*/
+       check is needed to be added for the right ones*/
 
 
     double lx, ly,gyll,gxll,msg_step,msg_height, glob_xleft, glob_yleft;
@@ -428,6 +428,7 @@ void retrieveMapCallback(const nav_msgs::OccupancyGrid::ConstPtr& msg){
         //MAP 3 (UNKNOWN Lane lines map)
         unkown_ll.info = msg->info;
         unkown_ll.data.resize(unkown_ll.info.width * unkown_ll.info.height);
+
         //MAP regions  (to classify lane lines)
         map_region.info = msg->info;
         map_region.data.resize(map_region.info.width * map_region.info.height);
@@ -435,6 +436,7 @@ void retrieveMapCallback(const nav_msgs::OccupancyGrid::ConstPtr& msg){
         //MAP 4 (Left Lane lines map)
         l_lane_map.info = msg->info;
         l_lane_map.data.resize(l_lane_map.info.width * l_lane_map.info.height);
+
         //MAP 5 (Right Lane lines map)
         r_lane_map.info = msg->info;
         r_lane_map.data.resize(r_lane_map.info.width * r_lane_map.info.height);
@@ -442,6 +444,7 @@ void retrieveMapCallback(const nav_msgs::OccupancyGrid::ConstPtr& msg){
         //MAP 7 (Predicted left)
         pred_l.info = msg->info;
         pred_l.data.resize(pred_l.info.width * pred_l.info.height);
+
         //MAP 8 (Predicted right)
         pred_r.info =msg->info;
         pred_r.data.resize(pred_r.info.width * pred_r.info.height);
@@ -457,7 +460,6 @@ void retrieveMapCallback(const nav_msgs::OccupancyGrid::ConstPtr& msg){
             map_prob_right[i]=0; //map prob right or left is sitting directly next to fullmap and overwriting it when they arent set to the right size
         }
 
-
         //******INITIALIZE lanelines deltas
         for (unsigned int i = 0; i< 10; i++) { //These #'s may need to be adjusted
             dleftx[i]=0;
@@ -471,9 +473,6 @@ void retrieveMapCallback(const nav_msgs::OccupancyGrid::ConstPtr& msg){
             robotyant[i]=0;
             headingant[i]=0;
         }
-
-
-      
 
         for (unsigned int lmi=0; lmi < 1081; lmi++) { //Init the fake lidar localmaps
             localmap1.ranges[lmi]=0;
@@ -510,7 +509,6 @@ void extractLocalMap(const nav_msgs::Odometry::ConstPtr& msg){
     			msg->pose.pose.orientation.w);
     btMatrix3x3(q).getEulerYPR(heading, pitch, roll);
     ////////////////////////////////////////////////////////////
-
 
     //Used to essentialy create a trail of your position. Used in the lanecallback
     for (unsigned int i= 0; i< 1; i++) {
