@@ -1,8 +1,0 @@
-prefix=/home/ameer/Desktop/catkin_ws/devel
-
-Name: mapping
-Description: Description of mapping
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/ameer/Desktop/catkin_ws/devel/lib 
-Requires: 

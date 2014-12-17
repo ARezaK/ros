@@ -1,8 +1,0 @@
-prefix=/home/ameer/Desktop/catkin_ws/install
-
-Name: rand_walk_w_goal
-Description: Description of rand_walk_w_goal
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/ameer/Desktop/catkin_ws/install/lib 
-Requires: 

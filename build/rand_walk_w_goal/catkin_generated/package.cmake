@@ -1,7 +1,0 @@
-set(_CATKIN_CURRENT_PACKAGE "rand_walk_w_goal")
-set(rand_walk_w_goal_MAINTAINER "amrl <amrl@todo.todo>")
-set(rand_walk_w_goal_DEPRECATED "")
-set(rand_walk_w_goal_VERSION "0.0.0")
-set(rand_walk_w_goal_BUILD_DEPENDS "roscpp" "rospy" "std_msgs")
-set(rand_walk_w_goal_RUN_DEPENDS "roscpp" "rospy" "std_msgs")
-set(rand_walk_w_goal_BUILDTOOL_DEPENDS "catkin")
