@@ -8,7 +8,7 @@ Ros mapping
 This is my catkin_ws folder so technically you dont need everything it.
 
 
-To run mapping, take the src folder in here and place it in your own.
+To run mapping, take the src folder in here and place it in your own catkin_ws.
 
 
 Do:
