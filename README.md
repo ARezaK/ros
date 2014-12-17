@@ -50,7 +50,7 @@ rosluanch hector_mapping.launch
 
 
 
-**5)Optional - Generating fake lane lines**
+**5) Optional - Generating fake lane lines**
 
 Make sure the lane lines are black in your world if you need to generate fake lane lines
 
