@@ -1,0 +1,175 @@
+include "stage_igvc_obstacles.inc"
+include "stage_igvc_waypoints.inc"
+include "cerberus_camera.inc"
+
+
+define myblock model
+(
+  size [0.500 0.500 0.500]
+  gui_nose 0
+)
+
+
+cerberus
+(		  
+  # can refer to the robot by this name
+  name "Robot"
+  pose [ 34.000 0.000 0.000 90.000 ] 
+  localization "gps"
+  localization_origin [ 0 0 0 0 ]
+)
+
+define floorplan model
+(
+  # sombre, sensible, artistic
+  color "gray30"
+
+  # most maps will need a bounding box
+  boundary 1
+
+  gui_nose 0
+  gui_grid 0
+
+  gui_outline 0
+  gripper_return 0
+  fiducial_return 0
+  ranger_return 1.000
+)
+
+define floorlaneline model
+(
+  # sombre, sensible, artistic
+  color "white"
+
+  # most maps will need a bounding box
+  boundary 1
+
+  gui_nose 0
+  gui_grid 0
+
+  gui_outline 0
+  gripper_return 0
+  fiducial_return 0
+  ranger_return 0
+)
+
+
+
+# set the resolution of the underlying raytrace model in meters
+resolution 0.02
+
+interval_sim 100  # simulation timestep in milliseconds
+
+
+window
+( 
+  size [ 1615 1026 ] 
+
+  rotate [ 0.000 0.000 ]
+  scale 90.406 
+)
+floorplan
+(
+  name "grass"
+  size [400.000 400.000 0.001 ]
+  pose [ 100.000 100.000 0.000 0.000]
+  color "ForestGreen"
+  obstacle_return 0
+  gui_move 0
+)
+
+# load an environment bitmap
+#floorplan
+#( 
+#  name "empty"
+#  bitmap "bitmaps/empty.png"
+#  size [32.000 32.000 0.800]
+#  pose [0 0 0 0]
+#  gui_move 0
+#)
+# Draw lanes
+floorplan
+( 
+  name "igvc"
+  size [ 67.100 63.200 0.002 ]
+  pose [ 0.100 0.100 0.000 0.000]
+  bitmap "bitmaps/igvc2007.png"
+  gui_outline 0
+  obstacle_return 0
+  color "white"
+  gui_move 0
+)
+
+# throw in a robot
+#erratic( pose [ -11.277 23.266 0 180.000 ] name "era" color "blue")
+#myblock( pose [ -13.924 25.020 0 180.000 ] color "red")
+
+
+
+
+
+
+
+
+
+
+## IGVC 2012 Waypoint total distance 40M ,9x11 meter driving path
+waypoint2m ( pose [-9.000 0.000  0.000 0.000 ]  )
+waypoint2m ( pose [-9.000  11.000 0.000 0.000 ] )
+waypoint2m ( pose [ 0.000 11.000 0.000 0.000 ])
+waypoint2m ( pose [ 0.000  0.000  0.000 0.000 ])
+
+myblock( pose [ 34.000 2.000 0.000 0.000])
+
+barrel( pose [ 1.000  1.000  0.000 0.000 ])
+barrel( pose [ 33.500  1.000  0.000 0.000 ])
+barrel( pose [ 35.000  2.000  0.000 0.000 ])
+
+barrel_orange( pose [ 1.000  0.000  0.000 0.000 ])
+barrel_red   ( pose [ 2.000  0.000  0.000 0.000 ] )
+barrel_blue  ( pose [ 3.000  0.000  0.000 0.000 ]  )
+barrel_yellow( pose [ 4.000  0.000  0.000 0.000 ] )
+barrel_black ( pose [ 5.000  0.000  0.000 0.000 ] )
+
+flag_red  (pose [6.000 0.000 0.000 0.000])
+flag_blue (pose [6.500 0.000 0.000 0.000])
+
+post_red    (pose [7.000 0.000 0.000 0.000])
+post_blue   (pose [7.500 0.000 0.000 0.000])
+post_white  (pose [7.000   0.500 0.000 0.000])
+post_yellow (pose [7.500 0.500 0.000 0.000])
+
+Barricade_Type1 (pose [8.000 0.000 0.000 0.000])
+Barricade_Type2 (pose [9.000 0.000 0.000 0.000])
+
+
+checker_board ( pose [ 30.000 0.000 0.000 0.000])
+checker_board ( pose [ 32.000 0.000 0.000 0.000])
+checker_board ( pose [ 34.000 0.000 0.000 0.000])
+checker_board ( pose [ 36.000 0.000 0.000 0.000])
+checker_board ( pose [ 38.000 0.000 0.000 0.000])
+checker_board ( pose [ 30.000 2.000 0.000 0.000])
+checker_board ( pose [ 32.000 2.000 0.000 0.000])
+checker_board ( pose [ 34.000 2.000 0.000 0.000])
+checker_board ( pose [ 36.000 2.000 0.000 0.000])
+checker_board ( pose [ 38.000 2.000 0.000 0.000])
+checker_board ( pose [ 30.000 4.000 0.000 0.000])
+checker_board ( pose [ 32.000 4.000 0.000 0.000])
+checker_board ( pose [ 34.000 4.000 0.000 0.000])
+checker_board ( pose [ 36.000 4.000 0.000 0.000])
+checker_board ( pose [ 38.000 4.000 0.000 0.000])
+checker_board ( pose [ 30.000 6.000 0.000 0.000])
+checker_board ( pose [ 32.000 6.000 0.000 0.000])
+checker_board ( pose [ 34.000 6.000 0.000 0.000])
+checker_board ( pose [ 36.000 6.000 0.000 0.000])
+checker_board ( pose [ 38.000 6.000 0.000 0.000])
+checker_board ( pose [ 30.000 8.000 0.000 0.000])
+checker_board ( pose [ 32.000 8.000 0.000 0.000])
+checker_board ( pose [ 34.000 8.000 0.000 0.000])
+checker_board ( pose [ 36.000 8.000 0.000 0.000])
+checker_board ( pose [ 38.000 8.000 0.000 0.000])
+
+checker_board_v ( pose [ 33.600 -8.000 0.000 0.000])
+checker_board_v ( pose [ 34.400 -8.000 0.000 0.000])
+#checker_board_v ( pose [ 0.000 -5.000 0.000 0.000])
+

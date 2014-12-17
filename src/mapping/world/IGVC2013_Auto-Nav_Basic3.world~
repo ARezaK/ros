@@ -1,0 +1,358 @@
+include "stage_igvc_obstacles.inc"
+include "stage_igvc_waypoints.inc"
+include "husky_camera.inc"
+include "cerberus_camera.inc"
+
+define myblock model
+(
+  size [0.5 0.5 0.5]
+  gui_nose 0
+)
+
+
+#husky_base
+#(		  
+#  # can refer to the robot by this name
+#  name "Robot"
+#  pose [ -1.408 -7.517 0.000 149.170 ] 
+#  localization "gps"
+#  localization_origin [ 0 0 0 0 ]
+#)
+ 
+cerberus
+(		  
+  # can refer to the robot by this name
+  name "Cerberus"
+  pose [  -22.106 61.605 0.000 -90.000 ] 
+  localization "gps"
+  localization_origin [ 0 0 0 0 ]
+)
+ 
+ 
+ 
+define floorplan model
+(
+  # sombre, sensible, artistic
+  color "green"
+
+  # most maps will need a bounding box
+  boundary 1
+
+  gui_nose 0
+  gui_grid 0
+
+  gui_outline 0
+  gripper_return 0
+  fiducial_return 0
+  ranger_return 1.000
+)
+
+define floorlaneline model
+(
+  # sombre, sensible, artistic
+  #color "white"
+
+  # most maps will need a bounding box
+  boundary 1
+
+  gui_nose 0
+  gui_grid 0
+
+  gui_outline 0
+  gripper_return 0
+  fiducial_return 1
+  obstacle_return 1 # Can hit things.
+  ranger_return 1   # reflects sonar beams
+)
+
+
+
+# set the resolution of the underlying raytrace model in meters
+resolution 0.02
+
+interval_sim 100  # simulation timestep in milliseconds
+
+
+window
+( 
+#The window size must larger then your camera image size 
+  size [ 699 693 ] 
+
+  rotate [ 0.000 -291.500 ]
+  scale 19.487 
+)
+floorplan
+(
+  name "grass"
+  size [150.000 90.000 0.001 ]
+  pose [ 0.000 0.000 0.000 90.000]
+  color "ForestGreen"
+  obstacle_return 0
+  gui_move 0
+)
+
+# load an environment bitmap
+#floorplan
+#( 
+#  name "empty"
+#  bitmap "bitmaps/IGVC2013_Auto-Nav_Basic3.png"
+#  size [32.000 32.000 0.800]
+#  pose [0 0 0 0]
+#  gui_move 0
+#)
+# Draw lanes
+floorplan
+( 
+  name "igvc"
+  size [ 131.600 81.700 0.800 ]
+  pose [ 0.100 0.100 0.000 -90.000]
+  
+  # IGVC2013_Auto-Nav_Basic.png image size 1316x817 = 131.6x81.7 meter
+  bitmap "bitmaps/IGVC2013_Auto-Nav_Basic.png"
+  gui_outline 0
+  obstacle_return 1
+  ranger_return 1.000
+  color "white"
+  gui_move 0
+)
+
+
+
+## IGVC Waypoint 
+waypoint2m_movable ( pose [ 14.412   -9.511  0.000 0.000 ] )
+waypoint2m_movable ( pose [-18.708   -3.954  0.000 0.000 ] )
+waypoint2m_movable ( pose [  5.830    6.998  0.000 0.000 ] )
+waypoint2m_movable ( pose [-15.965   47.039  0.000 0.000 ] )
+waypoint2m_movable ( pose [  5.568   29.004  0.000 0.000 ] )
+waypoint2m_movable ( pose [ 16.632   44.042  0.000 0.000 ] )
+waypoint2m_movable ( pose [  9.746  -41.720  0.000 0.000 ] )
+waypoint1m_movable ( pose [ 27.195    0.380  0.000 0.000 ] )
+waypoint1m_movable ( pose [ 27.435   35.810  0.000 0.000 ] )
+waypoint1m_movable ( pose [  9.607  -39.091  0.000 0.000 ] )
+waypoint1m_movable ( pose [  9.600  -39.000  0.000 0.000 ] )
+waypoint1m_movable ( pose [  9.600  -39.000  0.000 0.000 ] )
+waypoint1m_movable ( pose [  9.600  -39.000  0.000 0.000 ] )
+
+barrel          (pose [14.950  -21.958   0.000 0.000 ] )
+barrel          (pose [15.353  -21.185   0.000 0.000 ] )
+barrel          (pose [15.753  -20.415   0.000 0.000 ] )
+barrel          (pose [19.698  -19.667   0.000 0.000 ] )
+barrel          (pose [19.184  -20.458   0.000 0.000 ] )
+barrel          (pose [18.748  -21.190   0.000 0.000 ] )
+barrel          (pose [21.138  -22.957   0.000 0.000 ] )
+barrel          (pose [20.786  -23.790   0.000 0.000 ] )
+barrel          (pose [20.414  -24.603   0.000 0.000 ] )
+barrel          (pose [10.155  -20.675   0.000 0.000 ] )
+barrel          (pose [14.000  -35.000   0.000 0.000 ] )
+barrel          (pose [14.000  -35.000   0.000 0.000 ] )
+barrel          (pose [14.000  -35.000   0.000 0.000 ] )
+barrel          (pose [14.000  -35.000   0.000 0.000 ] )
+barrel          (pose [14.000  -35.000   0.000 0.000 ] )
+barrel          (pose [14.000  -35.000   0.000 0.000 ] )
+barrel          (pose [14.000  -35.000   0.000 0.000 ] )
+barrel          (pose [14.000  -35.000   0.000 0.000 ] )
+barrel          (pose [14.000  -35.000   0.000 0.000 ] )
+barrel          (pose [14.000  -35.000   0.000 0.000 ] )
+                
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+barrel_orange   (pose [14.000 -36.000    0.000 0.000 ])
+                             
+barrel_red      (pose [14.000  -37.000   0.000 0.000 ] )
+barrel_red      (pose [14.000  -37.000   0.000 0.000 ] )
+barrel_red      (pose [14.000  -37.000   0.000 0.000 ] )
+barrel_red      (pose [14.000  -37.000   0.000 0.000 ] )
+barrel_red      (pose [14.000  -37.000   0.000 0.000 ] )
+barrel_red      (pose [14.000  -37.000   0.000 0.000 ] )
+barrel_red      (pose [14.000  -37.000   0.000 0.000 ] )
+barrel_red      (pose [14.000  -37.000   0.000 0.000 ] )
+barrel_red      (pose [14.000  -37.000   0.000 0.000 ] )
+barrel_red      (pose [14.000  -37.000   0.000 0.000 ] )
+                              
+barrel_blue     (pose [6.258  -26.229   0.000 0.000 ]  )
+barrel_blue     (pose [14.000  -38.000   0.000 0.000 ]  )
+barrel_blue     (pose [14.000  -38.000   0.000 0.000 ]  )
+barrel_blue     (pose [14.000  -38.000   0.000 0.000 ]  )
+barrel_blue     (pose [14.000  -38.000   0.000 0.000 ]  )
+barrel_blue     (pose [14.000  -38.000   0.000 0.000 ]  )
+barrel_blue     (pose [14.000  -38.000   0.000 0.000 ]  )
+barrel_blue     (pose [14.000  -38.000   0.000 0.000 ]  )
+barrel_blue     (pose [14.000  -38.000   0.000 0.000 ]  )
+barrel_blue     (pose [14.000  -38.000   0.000 0.000 ]  )
+                              
+barrel_yellow   (pose [6.153  -25.386   0.000 0.000 ] )
+barrel_yellow   (pose [2.595  -2.719   0.000 0.000 ] )
+barrel_yellow   (pose [14.000  -39.000   0.000 0.000 ] )
+barrel_yellow   (pose [14.000  -39.000   0.000 0.000 ] )
+barrel_yellow   (pose [14.000  -39.000   0.000 0.000 ] )
+barrel_yellow   (pose [14.000  -39.000   0.000 0.000 ] )
+barrel_yellow   (pose [14.000  -39.000   0.000 0.000 ] )
+barrel_yellow   (pose [14.000  -39.000   0.000 0.000 ] )
+barrel_yellow   (pose [14.000  -39.000   0.000 0.000 ] )
+barrel_yellow   (pose [14.000  -39.000   0.000 0.000 ] )
+                              
+barrel_black    (pose [2.887  -22.567   0.000 0.000 ] )
+barrel_black    (pose [2.413  -23.199   0.000 0.000 ] )
+barrel_black    (pose [-0.876  0.083   0.000 0.000 ] )
+barrel_black    (pose [0.942  -0.992   0.000 0.000 ] )
+barrel_black    (pose [14.000  -40.000   0.000 0.000 ] )
+barrel_black    (pose [14.000  -40.000   0.000 0.000 ] )
+barrel_black    (pose [14.000  -40.000   0.000 0.000 ] )
+barrel_black    (pose [14.000  -40.000   0.000 0.000 ] )
+barrel_black    (pose [14.000  -40.000   0.000 0.000 ] )
+                
+barrel_white    (pose [ 10.761  -21.382  0.000 0.000 ] )
+barrel_white    (pose [ -6.250  -18.775  0.000 0.000 ] )
+barrel_white    (pose [ -6.961  -19.275  0.000 0.000 ] )
+barrel_white    (pose [ 14.000  -41.000  0.000 0.000 ] )
+barrel_white    (pose [ 14.000  -41.000  0.000 0.000 ] )
+barrel_white    (pose [ 14.000  -41.000  0.000 0.000 ] )
+barrel_white    (pose [ 14.000  -41.000  0.000 0.000 ] )
+barrel_white    (pose [ 14.000  -41.000  0.000 0.000 ] )
+barrel_white    (pose [ 14.000  -41.000  0.000 0.000 ] )
+barrel_white    (pose [ 14.000  -41.000  0.000 0.000 ] )
+barrel_white    (pose [ 14.000  -41.000  0.000 0.000 ] )
+                                
+flag_red        (pose [ -32.703 4.605 0.000 0.000])
+flag_red        (pose [ -32.307 4.083 0.000 0.000])
+flag_red        (pose [ -32.757 4.029 0.000 0.000])
+flag_red        (pose [ -31.929 5.414 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+flag_red        (pose [ 9.600 -35.000 0.000 0.000])
+                              
+flag_blue       (pose [ -33.057 3.502 0.000 0.000])
+flag_blue       (pose [ -29.731 15.898 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+flag_blue       (pose [ 9.600 -35.500 0.000 0.000])
+               
+post_red        (pose [-21.103 -26.833 0.000 0.000])
+post_red        (pose [-21.524 -27.429 0.000 0.000])
+post_red        (pose [-18.404 -27.324 0.000 0.000])
+post_red        (pose [27.061 -16.937 0.000 0.000])
+post_red        (pose [13.000 -35.000 0.000 0.000])
+post_red        (pose [13.000 -35.000 0.000 0.000])
+post_red        (pose [13.000 -35.000 0.000 0.000])
+post_red        (pose [13.000 -35.000 0.000 0.000])
+post_red        (pose [13.000 -35.000 0.000 0.000])
+post_red        (pose [13.000 -35.000 0.000 0.000])
+                              
+post_blue       (pose [-17.703 -25.906 0.000 0.000])
+post_blue       (pose [8.380 -24.720 0.000 0.000])
+post_blue       (pose [13.000 -36.000 0.000 0.000])
+post_blue       (pose [13.000 -36.000 0.000 0.000])
+post_blue       (pose [13.000 -36.000 0.000 0.000])
+post_blue       (pose [13.000 -36.000 0.000 0.000])
+post_blue       (pose [13.000 -36.000 0.000 0.000])
+post_blue       (pose [13.000 -36.000 0.000 0.000])
+post_blue       (pose [13.000 -36.000 0.000 0.000])
+post_blue       (pose [13.000 -36.000 0.000 0.000])
+                              
+post_white      (pose [-15.811 -28.133 0.000 0.000])
+post_white      (pose [13.000 -37.000 0.000 0.000])
+post_white      (pose [13.000 -37.000 0.000 0.000])
+post_white      (pose [13.000 -37.000 0.000 0.000])
+post_white      (pose [13.000 -37.000 0.000 0.000])
+post_white      (pose [13.000 -37.000 0.000 0.000])
+post_white      (pose [13.000 -37.000 0.000 0.000])
+post_white      (pose [13.000 -37.000 0.000 0.000])
+post_white      (pose [13.000 -37.000 0.000 0.000])
+                              
+post_yellow     (pose [-18.054 -26.679 0.000 0.000])
+post_yellow     (pose [-20.753 -26.294 0.000 0.000])
+post_yellow     (pose [-15.881 -29.553 0.000 0.000])
+post_yellow     (pose [-15.881 -28.852 0.000 0.000])
+post_yellow     (pose [13.000 -38.000 0.000 0.000])
+post_yellow     (pose [13.000 -38.000 0.000 0.000])
+post_yellow     (pose [13.000 -38.000 0.000 0.000])
+post_yellow     (pose [13.000 -38.000 0.000 0.000])
+post_yellow     (pose [13.000 -38.000 0.000 0.000])
+post_yellow     (pose [13.000 -38.000 0.000 0.000])
+post_yellow     (pose [13.000 -38.000 0.000 0.000])
+
+Barricade_Type1 (pose [-8.303 -22.937 0.000 121.513])
+Barricade_Type1 (pose [13.000 -39.000 0.000 90.000])
+Barricade_Type1 (pose [13.000 -39.000 0.000 90.000])
+Barricade_Type1 (pose [13.000 -39.000 0.000 90.000])
+Barricade_Type1 (pose [13.000 -39.000 0.000 90.000])
+Barricade_Type1 (pose [13.000 -39.000 0.000 90.000])
+Barricade_Type1 (pose [13.000 -39.000 0.000 90.000])
+Barricade_Type1 (pose [13.000 -39.000 0.000 90.000])
+Barricade_Type1 (pose [13.000 -39.000 0.000 90.000])
+Barricade_Type1 (pose [13.000 -39.000 0.000 90.000])
+                              
+Barricade_Type2 (pose [-0.851 -23.041 0.000 44.163])
+Barricade_Type2 (pose [-9.562 -7.107 0.000 90.000])
+Barricade_Type2 (pose [-9.645 -4.298 0.000 90.000])
+Barricade_Type2 (pose [13.000 -40.000 0.000 90.000])
+Barricade_Type2 (pose [13.000 -40.000 0.000 90.000])
+Barricade_Type2 (pose [13.000 -40.000 0.000 90.000])
+Barricade_Type2 (pose [13.000 -40.000 0.000 90.000])
+Barricade_Type2 (pose [13.000 -40.000 0.000 90.000])
+Barricade_Type2 (pose [13.000 -40.000 0.000 90.000])
+Barricade_Type2 (pose [13.000 -40.000 0.000 90.000])
+
+Fance2m         (pose [ 13.925   17.717   0.000 90.000])
+Fance2m         (pose [ -3.095   17.717   0.000 90.000])
+Fance2m         (pose [ -30.547  9.402   0.000 -119.130])
+Fance5m         (pose [ -32.895  8.122   0.000 -126.761])
+Fance5m         (pose [-30.398   4.002  0.000 -169.733])
+Fance5m         (pose [-28.714   6.103  0.000 -169.732])
+Fance5m         (pose [-10.000   -60.500  0.000 90.000])
+Fance10m        (pose [ -31.106   15.001   0.000 177.845])
+Fance10m        (pose [ -34.338  14.957   0.000 1.192])
+Fance10m        (pose [-10.000   -61.000  0.000 90.000])
+Fance10m        (pose [-10.000   -61.000  0.000 90.000])
+Fance15m        (pose [-10.000   -61.500  0.000 90.000])
+Fance15m        (pose [-10.000   -61.500  0.000 90.000])
+Fance15m        (pose [ -19.592    3.814   0.000 90.000])
+Fance15m        (pose [ -21.558   0.996   0.000 90.000])
+Fance20m        (pose [-10.000   -62.000  0.000 90.000])
+Fance20m        (pose [-10.000   -62.000  0.000 90.000])
+

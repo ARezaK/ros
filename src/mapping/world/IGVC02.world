@@ -1,0 +1,167 @@
+include "stage_igvc_obstacles.inc"
+include "stage_igvc_waypoints.inc"
+include "cerberus_camera.inc"
+
+
+define myblock model
+(
+  size [0.5 0.5 0.5]
+  gui_nose 0
+)
+
+
+cerberus
+(		  
+  # can refer to the robot by this name
+  name "Robot"
+  pose [ -1.778 -7.552 0.000 141.237 ] 
+  localization "gps"
+  localization_origin [ 0 0 0 0 ]
+)
+
+define floorplan model
+(
+  # sombre, sensible, artistic
+  color "gray30"
+
+  # most maps will need a bounding box
+  boundary 1
+
+  gui_nose 0
+  gui_grid 0
+
+  gui_outline 0
+  gripper_return 0
+  fiducial_return 0
+  ranger_return 1.000
+)
+
+define floorlaneline model
+(
+  # sombre, sensible, artistic
+  color "white"
+
+  # most maps will need a bounding box
+  boundary 1
+
+  gui_nose 0
+  gui_grid 0
+
+  gui_outline 0
+  gripper_return 0
+  fiducial_return 0
+  ranger_return 0
+)
+
+
+
+# set the resolution of the underlying raytrace model in meters
+resolution 0.02
+
+interval_sim 100  # simulation timestep in milliseconds
+
+
+window
+( 
+  size [ 745 448 ] 
+
+  rotate [ 0.000 0.000 ]
+  scale 19.675 
+)
+floorplan
+(
+  name "grass"
+  size [400.000 400.000 0.001 ]
+  pose [ 100.000 100.000 0.000 0.000]
+  color "ForestGreen"
+  obstacle_return 0
+  gui_move 0
+)
+
+# load an environment bitmap
+#floorplan
+#( 
+#  name "empty"
+#  bitmap "bitmaps/empty.png"
+#  size [32.000 32.000 0.800]
+#  pose [0 0 0 0]
+#  gui_move 0
+#)
+# Draw lanes
+floorplan
+( 
+  name "igvc"
+  size [ 67.100 63.200 0.002 ]
+  pose [ 0.100 0.100 0.000 0.000]
+  bitmap "bitmaps/igvc2007.png"
+  gui_outline 0
+  obstacle_return 0
+  color "white"
+  gui_move 0
+)
+
+# throw in a robot
+#erratic( pose [ -11.277 23.266 0 180.000 ] name "era" color "blue")
+#myblock( pose [ -13.924 25.020 0 180.000 ] color "red")
+
+
+
+
+
+
+
+
+
+
+## IGVC 2012 Waypoint total distance 40M ,9x11 meter driving path
+waypoint2m ( pose [-9.000 0.000  0.000 0.000 ]  )
+waypoint2m ( pose [-9.000  11.000 0.000 0.000 ] )
+waypoint2m ( pose [ 0.000 11.000 0.000 0.000 ])
+waypoint2m ( pose [ 0.000  0.000  0.000 0.000 ])
+
+
+
+barrel_orange( pose [ -3.885  -4.475  0.000 0.000 ])
+barrel_red   ( pose [ -4.378  -4.979  0.000 0.000 ] )
+barrel_blue  ( pose [ -6.698  -4.766  0.000 0.000 ]  )
+barrel_yellow( pose [ -7.002  -5.501  0.000 0.000 ] )
+barrel_black ( pose [ 5.000  0.000  0.000 0.000 ] )
+
+flag_red  (pose [-4.407 -7.016 0.000 -111.727])
+flag_blue (pose [-3.620 -5.608 0.000 63.025])
+
+post_red    (pose [7.000 0.000 0.000 0.000])
+post_blue   (pose [7.500 0.000 0.000 0.000])
+post_white  (pose [7.000   0.500 0.000 0.000])
+post_yellow (pose [7.500 0.500 0.000 0.000])
+
+Barricade_Type1 (pose [-7.768 -2.774 0.000 -123.186])
+Barricade_Type2 (pose [9.000 0.000 0.000 0.000])
+
+
+checker_board ( pose [ 30.000 0.000 0.000 0.000])
+checker_board ( pose [ 32.000 0.000 0.000 0.000])
+checker_board ( pose [ 34.000 0.000 0.000 0.000])
+checker_board ( pose [ 36.000 0.000 0.000 0.000])
+checker_board ( pose [ 38.000 0.000 0.000 0.000])
+checker_board ( pose [ 30.000 2.000 0.000 0.000])
+checker_board ( pose [ 32.000 2.000 0.000 0.000])
+checker_board ( pose [ 34.000 2.000 0.000 0.000])
+checker_board ( pose [ 36.000 2.000 0.000 0.000])
+checker_board ( pose [ 38.000 2.000 0.000 0.000])
+checker_board ( pose [ 30.000 4.000 0.000 0.000])
+checker_board ( pose [ 32.000 4.000 0.000 0.000])
+checker_board ( pose [ 34.000 4.000 0.000 0.000])
+checker_board ( pose [ 36.000 4.000 0.000 0.000])
+checker_board ( pose [ 38.000 4.000 0.000 0.000])
+checker_board ( pose [ 30.000 6.000 0.000 0.000])
+checker_board ( pose [ 32.000 6.000 0.000 0.000])
+checker_board ( pose [ 34.000 6.000 0.000 0.000])
+checker_board ( pose [ 36.000 6.000 0.000 0.000])
+checker_board ( pose [ 38.000 6.000 0.000 0.000])
+checker_board ( pose [ 30.000 8.000 0.000 0.000])
+checker_board ( pose [ 32.000 8.000 0.000 0.000])
+checker_board ( pose [ 34.000 8.000 0.000 0.000])
+checker_board ( pose [ 36.000 8.000 0.000 0.000])
+checker_board ( pose [ 38.000 8.000 0.000 0.000])
+
