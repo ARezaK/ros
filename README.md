@@ -68,3 +68,6 @@ The visualizedimage topic is a visualization of the image before it is converted
 **6) Mapping Program**
 
 rosrun mapping mapping
+
+
+To see what the program is publishing look at the bottom of the mapping code.
