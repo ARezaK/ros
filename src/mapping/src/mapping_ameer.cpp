@@ -74,7 +74,16 @@ using namespace std;                        //Don't remember exactly why I inclu
 //5) Look at precaution #4
 //6) Once IP is set up and Lane lines are done you can implement the other if statements required in extractLocalMap. Its noted in the function.
 //7) Converting the lidar scan from the local map seems to cause some minor offsets (ONLY ON CERTAIN MAPS ie IGVC but not on random walk) Still not sure why.
-//8)
+
+/*Completed
+- Implement gmapping
+- Implement hector mapping
+- Fix Pose callback
+- Update standard initilization to work with ROS hydro
+- Update everything in the pose callback to work with ros hydro
+- Implemented Transform Code
+- Cleaned up code
+- Changed setup (removed the 50 lines of setup from leonardos code)
 //*****************************************VARIABLES USED***********************************************************************************
 double pose_xinit, pose_yinit, pose_ainit;              //intitial position of the robot values in UTM //(used in alternate pose callback)
 float robotx=0, roboty=0, heading=0, pitch=0, roll=0;  //robotx and roboty are the current position of the robot in meters in global coordinates
